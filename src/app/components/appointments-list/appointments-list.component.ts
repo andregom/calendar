@@ -20,6 +20,6 @@ export class AppointmentsListComponent {
     this.hours = Array.from({length: 24}, (_, i) => i);
 
     // Generate an array of all minutes in an hour
-    this.minutes = Array.from({length: 12}, (_, i) => i * 5);
+    this.minutes = Array.from({length: 60}, (_, i) => i);
   }
 }
