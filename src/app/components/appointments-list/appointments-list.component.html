@@ -1,0 +1,33 @@
+<div class="calendar-container">
+    <mat-card class="demo-inline-calendar-card">
+        <mat-calendar [(selected)]="todayDate"></mat-calendar>
+    </mat-card>
+</div>
+
+<div class="hour-slots">
+    <h1>Available Hours</h1>
+    <!-- <mat-form-field> -->
+        <mat-label>Hour</mat-label>
+
+        <!-- <mat-select #selector placeholder="Choose an Hour" multiple> -->
+            <mat-option *ngFor="let hour of hours" [value]="hour">
+                {{ hour }}
+            </mat-option>
+            <!-- <mat-radio-group> -->
+                <mat-radio-button *ngFor="let minute of minutes" [value]="minute"
+                    style="display: block; padding: 12px 12px 12px 32px;">
+                    {{ minute }}
+                </mat-radio-button>
+            <!-- </mat-radio-group> -->
+        <!-- </mat-select> -->
+
+        <!-- <mat-select [(ngModel)]="selectedHour" #hourSelect [keepOpen]="true">
+            <mat-option *ngFor="let hour of hours" [value]="hour">{{ hour }}</mat-option>
+        </mat-select>
+
+        <mat-label>Minute</mat-label>
+        <mat-select [(ngModel)]="selectedMinute" #minuteSelect [keepOpen]="isMinuteSelectOpen">
+            <mat-option *ngFor="let minute of minutes" [value]="minute">{{ minute }}</mat-option>
+        </mat-select> -->
+    <!-- </mat-form-field> -->
+</div>

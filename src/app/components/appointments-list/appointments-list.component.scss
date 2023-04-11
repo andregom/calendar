@@ -1,0 +1,140 @@
+// .calendar-container {
+//     width: 150px;
+//     height: 150px;
+// }
+
+.hour-slots {
+    display: flex;
+    flex-direction: column;
+    position: fixed;
+    right: 10px;
+    overflow-y: scroll;
+}
+
+::ng-deep {
+    .mat-select-0-panel {
+        width: 100px;
+        background-color: red;
+    }
+    
+    .mat-radio-group {
+        position: fixed !important;
+        right: 10px;
+        width: 100px;
+        overflow-y: scroll;
+    }
+    
+    .mat-mdc-option {
+        float: right;
+        width: 50px;
+    }
+}
+
+::ng-deep {
+
+    .mat-calendar-table-header tr th :not(:first-child) {
+        display: none;
+    }
+
+    .mat-calendar-body-label {
+        display: flexbox;
+        flex-direction: row;
+    }
+
+    .mat-calendar-table-header tr th .ng-star-inserted {
+        display: none;
+    }
+
+    .mat-calendar-table-header-divider {
+        display: none;
+    }
+    
+    .mat-calendar-table-header tr {
+        gap: 4px;
+    }
+
+    .mat-calendar-table-header tr th span {
+        color: rgb(83, 123, 151);
+        background-image: linear-gradient(-45deg, #bbdbff, #7bb9ec);
+        box-shadow: 0 2px 10px rgba(225, 247, 253, 0.3);
+        border: 0.5px solid rgb(149, 187, 218);
+        padding: 5px;
+        margin: 2px;
+        border-radius: 5px;
+        cursor: pointer;
+        &:hover{
+            background-image: linear-gradient(-45deg, #8aa8ca, #90b5d3);
+            color: rgb(181, 217, 238);
+        }
+    }
+
+    .mat-calendar-body-label {
+        background-color: rgb(190, 231, 236);
+        width: min-content;
+    }
+
+    .ng-star-inserted .mat-calendar-body-cell-container {
+        line-height: 15px !important;
+        background-color: rgb(210, 245, 247);
+        align-items: center;
+        text-align: center;
+    }
+
+    .mat-calendar-body tr td button {
+        // background-color: #f0fae1;
+        padding-left: 2px;
+    }
+
+    .mat-calendar-content[ng-reflect-ng-switch="multi-year"] .mat-calendar-body-cell-container{
+        padding: 50px
+    }
+
+    .mat-calendar-content[ng-reflect-ng-switch="year"] .mat-calendar-body-cell-container{
+        padding: 50px
+    }
+
+    .mat-calendar-body-cell-content.mat-focus-indicator {
+        width: 35px;
+        height: 45px;
+        background-image: linear-gradient(-45deg, rgb(227, 241, 234), rgb(164, 204, 184));
+        border: 0.5px solid rgb(189, 233, 189);
+    }
+
+    .mat-calendar {
+        position: absolute;
+        top: 0px;
+        left: 0px;
+        background-color: rgb(230, 249, 252);
+        border-radius: 5px;
+        // z-index: 2;
+    }
+
+    .mat-calendar-body-active {
+        background-color: rgb(130, 197, 241) !important;
+    }
+    
+    .mat-calendar-body-selected {
+        width: 45px !important;
+        height: 55px !important;
+        background-image: linear-gradient(-45deg, rgb(227, 241, 234), rgb(34, 138, 86));
+        color: rgb(156, 110, 110) !important;
+        border: 1px solid rgb(240, 114, 91) !important;
+        font-weight: 700;
+        transition: 0.3s;
+    }
+
+    .mat-calendar-header {}
+
+    .mat-calendar-content {
+        /* Estilos personalizados para o conteúdo do calendário */
+        /* ... */
+        gap: 5px !important;
+
+    }
+
+    .mat-calendar-table {
+        /* Estilos personalizados para a tabela do calendário */
+        /* ... */
+    }
+
+}
