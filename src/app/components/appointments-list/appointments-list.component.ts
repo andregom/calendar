@@ -14,7 +14,7 @@ export class AppointmentsListComponent {
   selectedMinute: number | undefined;
 
   selectedHoursSet: Set<number> = new Set([1, 5]);
-  selectedHours: BehaviorSubject<Set<number>> = new BehaviorSubject(new Set([1, 6]))
+  selectedHours: BehaviorSubject<Set<number>> = new BehaviorSubject(new Set())
   isSelecting: boolean = false;
 
   public selectOptions: Object = {};
@@ -43,11 +43,9 @@ export class AppointmentsListComponent {
   }
 
   startSelecting(event: any) {
-    console.log(event.target);
     this.isSelecting = true;
     const value = Number(event.target.firstElementChild.innerText);
-    this.selectedHours.next(this.selectedHours.value.add(Number(value)));
-    this.selectedHours.next(this.selectedHours.value.add(event.target.value));
+    this.selectedHours.next(new Set([value]));
   }
 
   finishSelecting() {
@@ -58,16 +56,11 @@ export class AppointmentsListComponent {
     if (this.isSelecting) {
       const value = Number(event.target.firstElementChild.innerText);
       this.selectedHours.next(this.selectedHours.value.add(Number(value)));
-      console.log(event.target);
-      console.log(event.target.firstElementChild.innerText);
-      console.log(this.selectedHours.value);
-      console.log(this.selectedHours.value.has(value));
     }
   }
 
   change(event: any): void {
     if (event.isUserInput) {
-      // console.log(event.source.value, event.source.selected);
     }
   }
 }

@@ -18,12 +18,12 @@ export class ElementReference {
         if (this.selection &&  this.selection.has(this.matOption.value)) {
             this.matOption.select();
         }
-        console.log(this.selection);
-        console.log(typeof this.matOption.value);
 
         this.selectedHoursSub?.subscribe(value => {
             if (value &&  value.has(this.matOption.value)) {
                 this.matOption.select();
+            } else {
+                this.matOption.deselect();
             }
         })
     }
