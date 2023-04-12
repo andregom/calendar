@@ -42,10 +42,27 @@ export class AppointmentsListComponent {
     })
   }
 
+  deselectIfSelected(event: any) {
+    if (this.selectedHours.value.size === 0) {
+      this.isSelecting = true;
+      const value = Number(event.target?.firstElementChild.innerText);
+      this.selectedHours.next((()=> {
+        this.selectedHours.value.delete(value);
+        return this.selectedHours.value;
+      })());
+      this.isSelecting = false;
+    }
+  }
+
   startSelecting(event: any) {
-    this.isSelecting = true;
-    const value = Number(event.target.firstElementChild.innerText);
-    this.selectedHours.next(new Set([value]));
+    if (this.selectedHours.value.size === 0) {
+      this.isSelecting = true;
+      const value = Number(event.target.firstElementChild.innerText);
+      this.selectedHours.next(new Set([value]));
+    } else if (this.selectedHours.value.size > 0) {
+      this.selectedHours.next(new Set());
+      this.isSelecting = false;
+    }
   }
 
   finishSelecting() {

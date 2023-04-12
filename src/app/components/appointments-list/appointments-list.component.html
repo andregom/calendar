@@ -14,7 +14,8 @@
             <!-- <mat-form-field> -->
             <mat-label>Hours</mat-label>
             <div
-              class="hours-slots"
+            class="hours-slots"
+              (click)="deselectIfSelected($event)"
               (mousedown)="startSelecting($event)"
               (mouseleave)="finishSelecting()"
               (mouseup)="finishSelecting()"
