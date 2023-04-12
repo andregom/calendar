@@ -15,12 +15,18 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 
+import { DragDropModule } from '@angular/cdk/drag-drop';
+
+import { ElementReference } from 'src/app/directives/element-ref.directive';
+
+
 @NgModule({
   declarations: [
     AppComponent,
     AppointmentFormComponent,
     HomeComponent,
-    AppointmentsListComponent
+    AppointmentsListComponent,
+    ElementReference
   ],
   imports: [
     BrowserModule,
@@ -31,7 +37,8 @@ import { MatNativeDateModule } from '@angular/material/core';
     MatCardModule,
     MatFormFieldModule,
     MatSelectModule,
-    MatRadioModule
+    MatRadioModule,
+    DragDropModule,
   ],
   providers: [
     MatDatepickerModule,

@@ -13,12 +13,34 @@
             <h1>Hours Available</h1>
             <!-- <mat-form-field> -->
             <mat-label>Hours</mat-label>
-            <div class="hours-slots">
-                <mat-option *ngFor="let hour of hours" [value]="hour">
-                    <div class="hour hour-{{hour}}">
-                        {{ hour }}
-                    </div>
+            <div
+              class="hours-slots"
+              (mousedown)="startSelecting($event)"
+              (mouseleave)="finishSelecting()"
+              (mouseup)="finishSelecting()"
+            >
+            <!-- <mat-select
+              [value]="selectedHours"
+              [disableOptionCentering]="true"
+              multiple="true"
+            > -->
+            <mat-option
+                sele
+                (mouseover)="selectItem($event)"
+                (onSelectionChange)="change($event)"
+                *ngFor="let hour of hours"
+                [value]="hour"
+                elementRef 
+                [selection]="(selectedHoursSet)"
+                [selectedHoursSub]="(selectedHours)"
+            >
+                <div
+                    class="hour hour-{{hour}}"
+                >
+                    {{ hour }}
+                </div>
                 </mat-option>
+            <!-- </mat-select> -->
             </div>
         </div>
         <!-- <mat-radio-group> -->
