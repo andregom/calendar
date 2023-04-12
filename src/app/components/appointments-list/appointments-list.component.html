@@ -15,9 +15,10 @@
             <mat-label>Hours</mat-label>
             <div
               class="hours-slots"
+              (click)="deselect($event)"
               (mousedown)="startSelecting($event)"
-              (mouseleave)="finishSelecting()"
-              (mouseup)="finishSelecting()"
+              (mouseleave)="finishSelectingByLeave($event)"
+              (mouseup)="finishSelectingByMouseUp($event)"
             >
             <!-- <mat-select
               [value]="selectedHours"
