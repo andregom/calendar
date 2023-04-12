@@ -13,9 +13,13 @@ export class AppointmentsListComponent {
   selectedHour: number | undefined;
   selectedMinute: number | undefined;
 
-  selectedHoursSet: Set<number> = new Set([1, 5]);
+  selectedMinutesSet: Set<number> = new Set();
+  selectedHoursSet: Set<number> = new Set();
+  selectedMinutes: BehaviorSubject<Set<number>> = new BehaviorSubject(new Set())
   selectedHours: BehaviorSubject<Set<number>> = new BehaviorSubject(new Set())
   isSelecting: boolean = false;
+
+  isSelectingSub: BehaviorSubject<boolean> = new BehaviorSubject(false);
 
   public selectOptions: Object = {};
   public pageSettings: Object = {};
@@ -43,37 +47,39 @@ export class AppointmentsListComponent {
   }
 
   deselectIfSelected(event: any) {
-    if (this.selectedHours.value.size === 0) {
-      this.isSelecting = true;
-      const value = Number(event.target?.firstElementChild.innerText);
-      this.selectedHours.next((()=> {
-        this.selectedHours.value.delete(value);
-        return this.selectedHours.value;
-      })());
-      this.isSelecting = false;
-    }
+    // if (this.selectedHours.value.size === 0) {
+    //   this.isSelecting = true;
+    //   const value = Number(event.target?.firstElementChild.innerText);
+    //   this.selectedHours.next((()=> {
+    //     this.selectedHours.value.delete(value);
+    //     return this.selectedHours.value;
+    //   })());
+    //   this.isSelecting = false;
+    // }
   }
 
   startSelecting(event: any) {
-    if (this.selectedHours.value.size === 0) {
-      this.isSelecting = true;
-      const value = Number(event.target.firstElementChild.innerText);
-      this.selectedHours.next(new Set([value]));
-    } else if (this.selectedHours.value.size > 0) {
-      this.selectedHours.next(new Set());
-      this.isSelecting = false;
-    }
+    this.isSelectingSub.next(true);
+    // if (this.selectedHours.value.size === 0) {
+    //   this.isSelecting = true;
+    //   const value = Number(event.target.firstElementChild.innerText);
+    //   this.selectedHours.next(new Set([value]));
+    // } else if (this.selectedHours.value.size > 0) {
+    //   this.selectedHours.next(new Set());
+    //   this.isSelecting = false;
+    // }
   }
 
   finishSelecting() {
-    this.isSelecting = false;
+    this.isSelectingSub.next(false);
+    // this.isSelecting = false;
   }
 
   selectItem(event: any) {
-    if (this.isSelecting) {
-      const value = Number(event.target.firstElementChild.innerText);
-      this.selectedHours.next(this.selectedHours.value.add(Number(value)));
-    }
+    // if (this.isSelecting) {
+    //   const value = Number(event.target.firstElementChild.innerText);
+    //   this.selectedHours.next(this.selectedHours.value.add(Number(value)));
+    // }
   }
 
   change(event: any): void {

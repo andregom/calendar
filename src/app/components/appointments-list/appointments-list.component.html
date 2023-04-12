@@ -13,27 +13,28 @@
             <h1>Hours Available</h1>
             <!-- <mat-form-field> -->
             <mat-label>Hours</mat-label>
+            <!-- (click)="deselectIfSelected($event)" -->
             <div
-              class="hours-slots"
-              (click)="deselectIfSelected($event)"
               (mousedown)="startSelecting($event)"
               (mouseleave)="finishSelecting()"
               (mouseup)="finishSelecting()"
+              class="hours-slots"
             >
             <!-- <mat-select
               [value]="selectedHours"
               [disableOptionCentering]="true"
               multiple="true"
             > -->
+            <!-- (mouseover)="selectItem($event)" -->
             <mat-option
-                sele
-                (mouseover)="selectItem($event)"
                 (onSelectionChange)="change($event)"
                 *ngFor="let hour of hours"
                 [value]="hour"
                 elementRef 
                 [selection]="(selectedHoursSet)"
-                [selectedHoursSub]="(selectedHours)"
+                [selectedSub]="(selectedHours)"
+                [isSelectingSub]="(isSelectingSub)"
+                disabled="true"
             >
                 <div
                     class="hour hour-{{hour}}"
@@ -50,12 +51,18 @@
             <!-- <mat-form-field> -->
             <mat-label>Minutes</mat-label>
             <div class="minutes-slots">
-                <mat-radio-button *ngFor="let minute of minutes" [value]="minute"
-                    style="display: block; padding: 12px 12px 12px 32px;">
+                <mat-option
+                  *ngFor="let minute of minutes"
+                  [value]="minute"
+                  style="display: flex; padding: 12px 12px 12px 32px;"
+                  elementRef 
+                  [selection]="(selectedMinutesSet)"
+                  [selectedSub]="(selectedMinutes)"
+                >
                     <div class="minute minute-{{minute}}">
                         {{ minute | number: '1.2-2' }}
                     </div>
-                </mat-radio-button>
+                </mat-option>
             </div>
         </div>
         <!-- </mat-radio-group> -->
