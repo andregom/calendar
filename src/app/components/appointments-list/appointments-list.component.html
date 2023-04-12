@@ -7,17 +7,17 @@
     </div>
 
     <div class="time-slots">
-
         <!-- <mat-select #selector placeholder="Choose an Hour" multiple> -->
-        <div class="hours-container">
-            <h1>Hours Available</h1>
+            <div class="hours-container">
+                <h1>Hours Available</h1>
+                (Click and drag or select one by one)
             <!-- <mat-form-field> -->
             <mat-label>Hours</mat-label>
             <!-- (click)="deselectIfSelected($event)" -->
             <div
-              (mousedown)="startSelecting($event)"
-              (mouseleave)="finishSelecting()"
-              (mouseup)="finishSelecting()"
+              (mousedown)="startSelectingHours($event)"
+              (mouseleave)="finishSelectingHours()"
+              (mouseup)="finishSelectingHours()"
               class="hours-slots"
             >
             <!-- <mat-select
@@ -33,7 +33,7 @@
                 elementRef 
                 [selection]="(selectedHoursSet)"
                 [selectedSub]="(selectedHours)"
-                [isSelectingSub]="(isSelectingSub)"
+                [isSelectingSub]="(isSelectingHoursSub)"
                 disabled="true"
             >
                 <div
@@ -47,17 +47,25 @@
         </div>
         <!-- <mat-radio-group> -->
         <div class="minutes-container">
-            <h1>Minutes Available in {{ todayDate }}</h1>
+            <h1>Minutes Available at {{ todayDate }}</h1>
             <!-- <mat-form-field> -->
             <mat-label>Minutes</mat-label>
-            <div class="minutes-slots">
+            <div
+              (mousedown)="startSelectingMinutes($event)"
+              (mouseleave)="finishSelectingMinutes()"
+              (mouseup)="finishSelectingMinutes()"
+              class="minutes-slots"
+            >
                 <mat-option
                   *ngFor="let minute of minutes"
                   [value]="minute"
                   style="display: flex; padding: 12px 12px 12px 32px;"
-                  elementRef 
+                  selectMinute
+                  (addToSelection)="selectMinuteItem($event)" 
                   [selection]="(selectedMinutesSet)"
                   [selectedSub]="(selectedMinutes)"
+                  [isSelectingSub]="(isSelectingMinutesSub)"
+                  disabled="true"
                 >
                     <div class="minute minute-{{minute}}">
                         {{ minute | number: '1.2-2' }}

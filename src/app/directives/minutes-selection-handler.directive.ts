@@ -1,18 +1,21 @@
-import { Directive, HostListener, Input } from '@angular/core'
+import { Directive, EventEmitter, HostListener, Input, Output } from '@angular/core'
 import { MatOption } from '@angular/material/core'
 import { BehaviorSubject } from 'rxjs';
 
 @Directive({
-    selector: '[elementRef]'
+    selector: '[selectMinute]'
 })
 
-export class SelectionHandler {
+export class MinutesSelectionHandler {
     @Input() isSelectingSub: BehaviorSubject<boolean> | undefined;
     @Input() selection: Set<number> | undefined;
     @Input() selectedSub: BehaviorSubject<Set<number>> | undefined;
 
+    @Output() addToSelection: EventEmitter<number> = new EventEmitter();
+
     constructor(private matOption: MatOption) {
         this.selection = new Set();
+        this.selectedSub = new BehaviorSubject(new Set());
     }
 
     ngOnInit() {
@@ -20,23 +23,33 @@ export class SelectionHandler {
             this.matOption.select();
         }
 
-        // this.selectedSub?.subscribe(value => {
-        //     if (value && value.has(this.matOption.value)) {
-        //         this.matOption.select();
-        //     } else {
-        //         this.matOption.deselect();
-        //     }
-        // })
+        this.selectedSub?.subscribe(value => {
+            if (value && value.has(this.matOption.value)) {
+                this.toggleSelect();
+            } else {
+                this.toggleDeselect();
+            }
+        })
     }
 
-    select() {
+    toggleSelect() {
         this.matOption.disabled = false;
         this.matOption.select();
     }
 
-    deselect() {
+    toggleDeselect() {
         this.matOption.disabled = true;
         this.matOption.deselect();
+    }
+
+    select() {
+        this.addToSelection.emit(this.matOption.value);
+    }
+
+    
+
+    deselect() {
+        
     }
 
     @HostListener('mousedown')
@@ -64,7 +77,7 @@ export class SelectionHandler {
     
     @HostListener('mouseleave')
     mouseleave() {
-        if (!this.matOption.selected)
+        if (!this.matOption.selected && !this.isSelectingSub?.value)
             this.matOption.disabled = true;
     }
 

@@ -2,11 +2,17 @@ import { Component } from '@angular/core';
 import { formatDate } from '@angular/common';
 import { BehaviorSubject, Subject } from 'rxjs';
 
+type reduceReturnType = {
+  arr: Array<number>;
+  prev: number;
+}
+
 @Component({
   selector: 'app-appointments-list',
   templateUrl: './appointments-list.component.html',
   styleUrls: ['./appointments-list.component.scss']
 })
+
 export class AppointmentsListComponent {
   hours: number[];
   minutes: number[];
@@ -15,11 +21,16 @@ export class AppointmentsListComponent {
 
   selectedMinutesSet: Set<number> = new Set();
   selectedHoursSet: Set<number> = new Set();
+
   selectedMinutes: BehaviorSubject<Set<number>> = new BehaviorSubject(new Set())
   selectedHours: BehaviorSubject<Set<number>> = new BehaviorSubject(new Set())
+
   isSelecting: boolean = false;
 
-  isSelectingSub: BehaviorSubject<boolean> = new BehaviorSubject(false);
+  isSelectingHoursSub: BehaviorSubject<boolean> = new BehaviorSubject(false);
+  isSelectingMinutesSub: BehaviorSubject<boolean> = new BehaviorSubject(false);
+
+
 
   public selectOptions: Object = {};
   public pageSettings: Object = {};
@@ -46,40 +57,51 @@ export class AppointmentsListComponent {
     })
   }
 
-  deselectIfSelected(event: any) {
-    // if (this.selectedHours.value.size === 0) {
-    //   this.isSelecting = true;
-    //   const value = Number(event.target?.firstElementChild.innerText);
-    //   this.selectedHours.next((()=> {
-    //     this.selectedHours.value.delete(value);
-    //     return this.selectedHours.value;
-    //   })());
-    //   this.isSelecting = false;
-    // }
+  startSelectingHours(event: any) {
+    this.isSelectingHoursSub.next(true);
   }
 
-  startSelecting(event: any) {
-    this.isSelectingSub.next(true);
-    // if (this.selectedHours.value.size === 0) {
-    //   this.isSelecting = true;
-    //   const value = Number(event.target.firstElementChild.innerText);
-    //   this.selectedHours.next(new Set([value]));
-    // } else if (this.selectedHours.value.size > 0) {
-    //   this.selectedHours.next(new Set());
-    //   this.isSelecting = false;
-    // }
+  finishSelectingHours() {
+    this.isSelectingHoursSub.next(false);
   }
 
-  finishSelecting() {
-    this.isSelectingSub.next(false);
-    // this.isSelecting = false;
+  startSelectingMinutes(event: any) {
+    this.isSelectingMinutesSub.next(true);
   }
 
-  selectItem(event: any) {
-    // if (this.isSelecting) {
-    //   const value = Number(event.target.firstElementChild.innerText);
-    //   this.selectedHours.next(this.selectedHours.value.add(Number(value)));
-    // }
+  finishSelectingMinutes() {
+    this.isSelectingMinutesSub.next(false);
+  }
+
+  fillinThegaps() {
+    const set = this.selectedMinutes.value;
+    const minMax = [...set].sort();
+
+    var arr: Set<number> = new Set()
+    var prev: any = undefined;
+    for (let i = 0; i < minMax.length; i++) {
+      const el = minMax[i];
+      if (prev !== undefined && el > prev + 1) {
+        for (let i = prev; i <= el; i++) {
+          arr.add(i);
+        }
+      } else {
+        arr.add(el);
+      }
+      prev = el;
+    }
+    console.log(arr);
+    this.selectedMinutes.next(new Set(arr));
+  }
+
+  selectMinuteItem(event: any) {
+    if (this.isSelectingMinutesSub.value) {
+      // const value = Number(event.target.firstElementChild.innerText);
+      this.selectedMinutes.next(this.selectedMinutes.value.add(Number(event)));
+      this.fillinThegaps();
+      console.log(event);
+      // console.log(this.selectedMinutes.value);
+    }
   }
 
   change(event: any): void {
