@@ -12,6 +12,8 @@ export class MinutesSelectionHandler {
     @Input() selectedSub: BehaviorSubject<Set<number>> | undefined;
 
     @Output() addToSelection: EventEmitter<number> = new EventEmitter();
+    @Output() removeFromSelection: EventEmitter<number> = new EventEmitter();
+    @Output() startNewSelection: EventEmitter<number> = new EventEmitter();
 
     constructor(private matOption: MatOption) {
         this.selection = new Set();
@@ -45,11 +47,9 @@ export class MinutesSelectionHandler {
     select() {
         this.addToSelection.emit(this.matOption.value);
     }
-
     
-
     deselect() {
-        
+        this.removeFromSelection.emit(this.matOption.value);
     }
 
     @HostListener('mousedown')

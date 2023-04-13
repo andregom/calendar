@@ -43,12 +43,9 @@ export class SelectionHandler {
     mousedown() {
         if (!this.matOption.selected) {
             this.select();
-            console.log('it was deselected!');
         }
         else {
             this.deselect();
-            console.log('it was selected!');
-            return
         }
     }
 

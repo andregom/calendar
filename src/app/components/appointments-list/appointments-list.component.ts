@@ -95,10 +95,10 @@ export class AppointmentsListComponent {
   }
 
   selectMinuteItem(event: any) {
+    this.selectedMinutes.next(this.selectedMinutes.value.add(Number(event)));
+    this.fillinThegaps();
     if (this.isSelectingMinutesSub.value) {
       // const value = Number(event.target.firstElementChild.innerText);
-      this.selectedMinutes.next(this.selectedMinutes.value.add(Number(event)));
-      this.fillinThegaps();
       console.log(event);
       // console.log(this.selectedMinutes.value);
     }
