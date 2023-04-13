@@ -31,7 +31,6 @@ export class AppointmentsListComponent {
   isSelectingMinutesSub: BehaviorSubject<boolean> = new BehaviorSubject(false);
 
 
-
   public selectOptions: Object = {};
   public pageSettings: Object = {};
 
@@ -69,12 +68,21 @@ export class AppointmentsListComponent {
     this.isSelectingMinutesSub.next(true);
   }
 
-  finishSelectingMinutes() {
-    this.isSelectingMinutesSub.next(false);
+  startNewSelectionHours(event: any) {
+    this.selectedHours.next(new Set([]));
   }
 
-  fillinThegaps() {
-    const set = this.selectedMinutes.value;
+  startNewSelectionMinutes(event: any) {
+    this.selectedMinutes.next(new Set([]));
+  }
+
+  finishSelectingMinutes() {
+    this.isSelectingMinutesSub.next(false);
+    this.fillinThegaps(this.selectedMinutes);
+  }
+
+  fillinThegaps(setSubscription: BehaviorSubject<Set<number>>) {
+    const set = setSubscription.value;
     const minMax = [...set].sort();
 
     var arr: Set<number> = new Set()
@@ -91,17 +99,17 @@ export class AppointmentsListComponent {
       prev = el;
     }
     console.log(arr);
-    this.selectedMinutes.next(new Set(arr));
+    setSubscription.next(new Set(arr));
+  }
+
+  selectHourItem(event: any) {
+    this.selectedHours.next(this.selectedHours.value.add(Number(event)));
+    this.fillinThegaps(this.selectedHours);
   }
 
   selectMinuteItem(event: any) {
     this.selectedMinutes.next(this.selectedMinutes.value.add(Number(event)));
-    this.fillinThegaps();
-    if (this.isSelectingMinutesSub.value) {
-      // const value = Number(event.target.firstElementChild.innerText);
-      console.log(event);
-      // console.log(this.selectedMinutes.value);
-    }
+    this.fillinThegaps(this.selectedMinutes);
   }
 
   change(event: any): void {

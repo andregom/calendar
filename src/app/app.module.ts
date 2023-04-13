@@ -17,8 +17,7 @@ import { MatNativeDateModule } from '@angular/material/core';
 
 import { DragDropModule } from '@angular/cdk/drag-drop';
 
-import { SelectionHandler } from 'src/app/directives/time-selection-handler.directive';
-import { MinutesSelectionHandler } from 'src/app/directives/minutes-selection-handler.directive';
+import { SelectionHandler } from 'src/app/directives/selection-handler.directive';
 
 
 @NgModule({
@@ -27,8 +26,7 @@ import { MinutesSelectionHandler } from 'src/app/directives/minutes-selection-ha
     AppointmentFormComponent,
     HomeComponent,
     AppointmentsListComponent,
-    SelectionHandler,
-    MinutesSelectionHandler
+    SelectionHandler
   ],
   imports: [
     BrowserModule,

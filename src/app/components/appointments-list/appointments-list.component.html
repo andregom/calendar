@@ -20,17 +20,13 @@
               (mouseup)="finishSelectingHours()"
               class="hours-slots"
             >
-            <!-- <mat-select
-              [value]="selectedHours"
-              [disableOptionCentering]="true"
-              multiple="true"
-            > -->
-            <!-- (mouseover)="selectItem($event)" -->
             <mat-option
                 (onSelectionChange)="change($event)"
                 *ngFor="let hour of hours"
                 [value]="hour"
-                elementRef 
+                handleSelecting
+                (startNewSelection)="startNewSelectionHours($event)"
+                (addToSelection)="selectHourItem($event)" 
                 [selection]="(selectedHoursSet)"
                 [selectedSub]="(selectedHours)"
                 [isSelectingSub]="(isSelectingHoursSub)"
@@ -48,6 +44,7 @@
         <!-- <mat-radio-group> -->
         <div class="minutes-container">
             <h1>Minutes Available at {{ todayDate }}</h1>
+            (Click and drag or select one by one)
             <!-- <mat-form-field> -->
             <mat-label>Minutes</mat-label>
             <div
@@ -60,7 +57,8 @@
                   *ngFor="let minute of minutes"
                   [value]="minute"
                   style="display: flex; padding: 12px 12px 12px 32px;"
-                  selectMinute
+                  handleSelecting
+                  (startNewSelection)="startNewSelectionMinutes($event)"
                   (addToSelection)="selectMinuteItem($event)" 
                   [selection]="(selectedMinutesSet)"
                   [selectedSub]="(selectedMinutes)"
@@ -73,17 +71,5 @@
                 </mat-option>
             </div>
         </div>
-        <!-- </mat-radio-group> -->
-        <!-- </mat-select> -->
-
-        <!-- <mat-select [(ngModel)]="selectedHour" #hourSelect [keepOpen]="true">
-            <mat-option *ngFor="let hour of hours" [value]="hour">{{ hour }}</mat-option>
-        </mat-select>
-
-        <mat-label>Minute</mat-label>
-        <mat-select [(ngModel)]="selectedMinute" #minuteSelect [keepOpen]="isMinuteSelectOpen">
-            <mat-option *ngFor="let minute of minutes" [value]="minute">{{ minute }}</mat-option>
-        </mat-select> -->
-        <!-- </mat-form-field> -->
     </div>
 </div>

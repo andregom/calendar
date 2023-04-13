@@ -3,10 +3,10 @@ import { MatOption } from '@angular/material/core'
 import { BehaviorSubject } from 'rxjs';
 
 @Directive({
-    selector: '[selectMinute]'
+    selector: '[handleSelecting]'
 })
 
-export class MinutesSelectionHandler {
+export class SelectionHandler {
     @Input() isSelectingSub: BehaviorSubject<boolean> | undefined;
     @Input() selection: Set<number> | undefined;
     @Input() selectedSub: BehaviorSubject<Set<number>> | undefined;
@@ -59,7 +59,8 @@ export class MinutesSelectionHandler {
             console.log('it was deselected!');
         }
         else {
-            this.deselect();
+            this.startNewSelection.emit(this.matOption.value);
+            // this.deselect();
             console.log('it was selected!');
             return
         }
