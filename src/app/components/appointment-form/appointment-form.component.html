@@ -1,35 +1,58 @@
 <h2>Create a new appointment</h2>
-<form  class="appointment-form">
+<form
+  class="appointment-form"
+  [formGroup]="form"
+  (ngSubmit)="onSubmit(form.value)"
+>
     <label for="appointment-form" class="form-label">
         Fill in the fields and create a new appointment 
     </label>
     <input
         class="title"
         type="text"
-        ngModel
+        formControlName="title"
         placeholder="Please add a title"
     />
     <input
         class="participant"
         type="text"
-        ngModel
+        formControlName="participant"
         placeholder="Other participant"
     />
     <input
         class="description"
         type="text"
-        ngModel
+        formControlName="description"
         placeholder="Description"
     />
-    <input
-      type="datetime-local"
-      min="2020-01-01T00:00"
-      max="2023-12-31T00:00"
-    />
+    <div class="start-date-container">
+        <span>start date</span> 
+        <input
+            type="datetime-local"
+            min="2020-01-01T00:00"
+            max="2023-12-31T00:00"
+            formControlName="start"
+        />
+    </div>
+    <div class="finnish-date-container">
+        <span>finnish date</span> 
+        <input
+            type="datetime-local"
+            min="2020-01-01T00:00"
+            max="2023-12-31T00:00"
+            formControlName="finnish"
+        />
+    </div>
     <button
       routerLink="choose_available"   
     >
         See available times
+    </button>
+    <button
+      routerLink="details" 
+      [disabled]="!form.valid" 
+    >
+        Book Right Away
     </button>
 
 </form>

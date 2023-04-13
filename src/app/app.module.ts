@@ -1,6 +1,8 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { AppointmentFormComponent } from './components/appointment-form/appointment-form.component';
@@ -8,8 +10,8 @@ import { HomeComponent } from './components/home/home.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppointmentsListComponent } from './components/appointments-list/appointments-list.component';
 
-import { MatCardModule} from '@angular/material/card';
-import { MatRadioModule, MatRadioGroup, MatRadioButton} from '@angular/material/radio';
+import { MatCardModule } from '@angular/material/card';
+import { MatRadioModule, MatRadioGroup, MatRadioButton } from '@angular/material/radio';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatSelectModule } from '@angular/material/select';
 import { MatDatepickerModule } from '@angular/material/datepicker';
@@ -39,10 +41,12 @@ import { SelectionHandler } from 'src/app/directives/selection-handler.directive
     MatSelectModule,
     MatRadioModule,
     DragDropModule,
+    FormsModule,
+    ReactiveFormsModule,
   ],
   providers: [
     MatDatepickerModule,
-    MatNativeDateModule,  
+    MatNativeDateModule,
     MatCardModule,
     MatFormFieldModule,
     MatSelectModule,

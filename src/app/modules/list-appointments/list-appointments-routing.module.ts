@@ -12,6 +12,10 @@ const routes: Routes = [
     path: 'list',
     component: AppointmentsListComponent
   },
+  {
+    path: 'list/details',
+    redirectTo: '/appointment/new'
+  },
 ];
 
 @NgModule({
