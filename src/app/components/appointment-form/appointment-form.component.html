@@ -43,16 +43,17 @@
             formControlName="finnish"
         />
     </div>
+    <!-- routerLink="details" -->
     <button
-      routerLink="choose_available"   
-    >
-        See available times
-    </button>
-    <button
-      routerLink="details" 
+      type="submit"
       [disabled]="!form.valid" 
     >
         Book Right Away
+    </button>
+    <button
+      (click)="goToTimeSlots(form.value)"
+    >
+        See available times
     </button>
 
 </form>
