@@ -3,3 +3,26 @@
   display: block;
   margin-bottom: 10px;
 }
+
+.appointment-form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  .appointment-form {
+    width: 400px;
+
+    h2 {
+      text-align: center;
+    }
+
+    label.form-label {
+      text-align: center;
+    }
+
+    input {
+      width: 100%;
+    }
+  }
+}

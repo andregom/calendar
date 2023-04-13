@@ -24,7 +24,7 @@ export class SelectionHandler {
         if (this.selection && this.selection.has(this.matOption.value)) {
             this.matOption.select();
         }
-
+        
         this.selectedSub?.subscribe(value => {
             if (value && value.has(this.matOption.value)) {
                 this.toggleSelect();

@@ -48,6 +48,22 @@
     flex: 1rem 1rem;
 }
 
+.book {
+    float: right;
+    padding: 20px 70px;
+    margin: 10px;
+    min-width: 80px;
+    cursor: pointer;
+    background-color: rgb(153, 129, 175);
+    border: 1px solid rgb(86, 65, 105);
+    border-radius: 10px;
+    font-weight: 800;
+    color: white;
+    &:hover {
+        background-color: rgb(181, 153, 207);
+    }
+}
+
 //time selector styling
 ::ng-deep {
 

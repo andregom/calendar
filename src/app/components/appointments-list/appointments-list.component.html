@@ -4,6 +4,12 @@
         <mat-card class="demo-inline-calendar-card">
             <mat-calendar [(selected)]="todayDate"></mat-calendar>
         </mat-card>
+        <button
+          class="book"
+          [routerLink]="['details/']"
+        >
+            Book
+        </button>
     </div>
 
     <div class="time-slots">
