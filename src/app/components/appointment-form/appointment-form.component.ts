@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { Observable, map } from 'rxjs';
 
 @Component({
   selector: 'app-appointment-form',
@@ -10,6 +11,8 @@ import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
   styleUrls: ['./appointment-form.component.scss']
 })
 export class AppointmentFormComponent implements OnInit {
+  state$: Observable<object> = new Observable;
+
   form: FormGroup;
   now: Date = new Date();
   oneHourFromNow: Date;
@@ -17,7 +20,7 @@ export class AppointmentFormComponent implements OnInit {
   finnishDate: string;
 
   constructor(
-    private ativateRoute: ActivatedRoute,
+    private activatedRoute: ActivatedRoute,
     public router: Router
   ) {
     this.oneHourFromNow = new Date();
@@ -35,15 +38,17 @@ export class AppointmentFormComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.state$ = this.activatedRoute.paramMap
+      .pipe(map(() => window.history.state));
   }
 
   goToTimeSlots(partialAppointmanet: any) {
-    this.router.navigate([this.router.url, 'choose_available'])
+    this.router.navigate([this.router.url, 'choose_available'], {state: {...partialAppointmanet}});
     console.log(partialAppointmanet);
   }
 
   onSubmit(appointment: any) {
-      this.router.navigate([this.router.url, 'details'])
+      this.router.navigate([this.router.url, 'details'], {state: {...appointment}});
       console.log(appointment);
   }
 
