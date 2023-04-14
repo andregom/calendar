@@ -2,7 +2,15 @@
 
     <div class="calendar-container">
         <mat-card class="demo-inline-calendar-card">
-            <mat-calendar [(selected)]="todayDate"></mat-calendar>
+            <mat-calendar
+              [ariaMultiSelectable]="'true'"
+              [startView]="'month'"
+              [(selected)]="todayDate"
+              appDateSelectioHandler
+              (selectDay)="selectDay($event)"
+              [selectedDates]="(selectedDates)"
+              [selectedDays]="(selectedDays)"
+            ></mat-calendar>
         </mat-card>
         <button
           class="book"

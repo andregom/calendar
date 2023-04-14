@@ -25,6 +25,13 @@ export class HttpService {
     })
   }
 
+  modifyAppointment(appointment: Appointment): Observable<Array<Appointment>> {
+    console.log(appointment);
+    return this.http.put<Array<Appointment>>(`${env.BASE_URL}/appointments`, appointment, {
+      params: {},
+    })
+  }
+
   deleteAppointment(id: number): Observable<Array<Appointment>> {
     console.log(id);
     return this.http.delete<Array<Appointment>>(`${env.BASE_URL}/appointments`, {

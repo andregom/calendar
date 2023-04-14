@@ -23,6 +23,7 @@ import { DragDropModule } from '@angular/cdk/drag-drop';
 import { SelectionHandler } from 'src/app/directives/selection-handler.directive';
 import { RescheduleHandler } from 'src/app/directives/reschedule-handler.directive';
 import { ScheduleManagementComponent } from './components/schedule-management/schedule-management.component';
+import { DateSelectioHandlerDirective } from './directives/date-selectio-handler.directive';
 
 
 @NgModule({
@@ -31,9 +32,10 @@ import { ScheduleManagementComponent } from './components/schedule-management/sc
     AppointmentFormComponent,
     HomeComponent,
     AppointmentsListComponent,
+    ScheduleManagementComponent,
     SelectionHandler,
     RescheduleHandler,
-    ScheduleManagementComponent
+    DateSelectioHandlerDirective,
   ],
   imports: [
     BrowserModule,

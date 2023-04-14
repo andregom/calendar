@@ -87,13 +87,4 @@ export class SelectionHandler {
             this.matOption.disabled = true;
     }
 
-    // @HostListener('mouseout')
-    // isItSafe() {
-    //     console.log("It really left rigth");
-    // }
-    // @HostListener('mouseout')
-    // messageInput() {
-    //     console.log(`The message input is ${this.message}`);
-    // }
-
 }

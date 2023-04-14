@@ -49,12 +49,4 @@ export class RescheduleHandler {
         this.matOption.deselect();
     }
 
-    select() {
-        this.addToSelection.emit(this.matOption.value);
-    }
-
-    deselect() {
-        this.removeFromSelection.emit(this.matOption.value);
-    }
-
 }
