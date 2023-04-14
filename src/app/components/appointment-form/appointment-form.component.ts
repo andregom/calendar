@@ -4,6 +4,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Observable, map } from 'rxjs';
+import { HttpService } from 'src/app/services/http.service';
 
 @Component({
   selector: 'app-appointment-form',
@@ -16,24 +17,25 @@ export class AppointmentFormComponent implements OnInit {
   form: FormGroup;
   now: Date = new Date();
   oneHourFromNow: Date;
-  startDate: string;
-  finnishDate: string;
+  start: string;
+  finnish: string;
 
   constructor(
+    private httpService: HttpService,
     private activatedRoute: ActivatedRoute,
     public router: Router
   ) {
     this.oneHourFromNow = new Date();
     this.oneHourFromNow.setHours(this.now.getHours() + 1)
-    this.startDate = formatDate(this.now, 'yyyy-MM-ddTHH:mm', 'en-US', '+0530');
-    this.finnishDate = formatDate(this.oneHourFromNow, 'yyyy-MM-ddTHH:mm', 'en-US', '+0530');
-    console.log(this.startDate);
+    this.start = formatDate(this.now, 'yyyy-MM-ddTHH:mm', 'en-US', '+0530');
+    this.finnish = formatDate(this.oneHourFromNow, 'yyyy-MM-ddTHH:mm', 'en-US', '+0530');
+    console.log(this.start);
     this.form = new FormGroup({
       title: new FormControl('New Appointment', Validators.required),
       participant: new FormControl(''),
       description: new FormControl(''),
-      start: new FormControl(`${this.startDate}`, Validators.required),
-      finnish: new FormControl(`${this.finnishDate}`, Validators.required),
+      start: new FormControl(`${this.start}`, Validators.required),
+      finnish: new FormControl(`${this.finnish}`, Validators.required),
     })
   }
 
@@ -48,6 +50,9 @@ export class AppointmentFormComponent implements OnInit {
   }
 
   onSubmit(appointment: any) {
+      this.httpService.createAppointment(appointment).subscribe((res) => {
+        console.log(res);
+      });
       this.router.navigate([this.router.url, 'details'], {state: {...appointment}});
       console.log(appointment);
   }

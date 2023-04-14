@@ -1,4 +1,4 @@
-import { Directive, EventEmitter, HostListener, Input, Output } from '@angular/core'
+import { Directive, ElementRef, EventEmitter, HostListener, Input, Output } from '@angular/core'
 import { MatOption } from '@angular/material/core'
 import { BehaviorSubject } from 'rxjs';
 
@@ -8,25 +8,31 @@ import { BehaviorSubject } from 'rxjs';
 
 export class SelectionHandler {
     @Input() isSelectingSub: BehaviorSubject<boolean> | undefined;
-    @Input() selection: Set<number> | undefined;
-    @Input() selectedSub: BehaviorSubject<Set<number>> | undefined;
+    @Input() selected: BehaviorSubject<Set<number>> | undefined;
+    @Input() cannotBeSelected: BehaviorSubject<Set<number>> | undefined;
 
     @Output() addToSelection: EventEmitter<number> = new EventEmitter();
     @Output() removeFromSelection: EventEmitter<number> = new EventEmitter();
     @Output() startNewSelection: EventEmitter<number> = new EventEmitter();
 
-    constructor(private matOption: MatOption) {
-        this.selection = new Set();
-        this.selectedSub = new BehaviorSubject(new Set());
+    constructor(
+        private matOption: MatOption,
+        private elemenRef: ElementRef
+    ) {
+        this.selected = new BehaviorSubject(new Set());
     }
 
     ngOnInit() {
-        if (this.selection && this.selection.has(this.matOption.value)) {
-            this.matOption.select();
-        }
-        
-        this.selectedSub?.subscribe(value => {
-            if (value && value.has(this.matOption.value)) {
+        this.cannotBeSelected?.subscribe(value => {
+            const isBooked = value && this.cannotBeSelected?.value.has(this.matOption.value);
+            if (isBooked) {
+                this.matOption._getHostElement().textContent = "Booked"
+            }
+        })
+
+        this.selected?.subscribe(value => {
+            const isSelectable = value && value.has(this.matOption.value) && !this.cannotBeSelected?.value.has(this.matOption.value);
+            if (isSelectable) {
                 this.toggleSelect();
             } else {
                 this.toggleDeselect();
@@ -47,7 +53,7 @@ export class SelectionHandler {
     select() {
         this.addToSelection.emit(this.matOption.value);
     }
-    
+
     deselect() {
         this.removeFromSelection.emit(this.matOption.value);
     }
@@ -75,7 +81,7 @@ export class SelectionHandler {
             this.matOption.disabled = false;
         }
     }
-    
+
     @HostListener('mouseleave')
     mouseleave() {
         if (!this.matOption.selected && !this.isSelectingSub?.value)

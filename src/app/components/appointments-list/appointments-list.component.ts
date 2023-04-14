@@ -1,11 +1,9 @@
 import { Component } from '@angular/core';
 import { formatDate } from '@angular/common';
 import { BehaviorSubject, Subject } from 'rxjs';
-
-type reduceReturnType = {
-  arr: Array<number>;
-  prev: number;
-}
+import { HttpService } from 'src/app/services/http.service';
+import { Appointment } from 'src/app/interfaces/appointment';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-appointments-list',
@@ -16,8 +14,6 @@ type reduceReturnType = {
 export class AppointmentsListComponent {
   hours: number[];
   minutes: number[];
-  selectedHour: number | undefined;
-  selectedMinute: number | undefined;
 
   selectedMinutesSet: Set<number> = new Set();
   selectedHoursSet: Set<number> = new Set();
@@ -25,18 +21,20 @@ export class AppointmentsListComponent {
   selectedMinutes: BehaviorSubject<Set<number>> = new BehaviorSubject(new Set())
   selectedHours: BehaviorSubject<Set<number>> = new BehaviorSubject(new Set())
 
-  isSelecting: boolean = false;
+  cannotBeSelectedMinutes: BehaviorSubject<Set<number>> = new BehaviorSubject(new Set())
+  cannotBeSelectedHours: BehaviorSubject<Set<number>> = new BehaviorSubject(new Set())
 
   isSelectingHoursSub: BehaviorSubject<boolean> = new BehaviorSubject(false);
   isSelectingMinutesSub: BehaviorSubject<boolean> = new BehaviorSubject(false);
 
-
-  public selectOptions: Object = {};
-  public pageSettings: Object = {};
+  listOfAppointments: BehaviorSubject<Array<Appointment>> = new BehaviorSubject<Array<Appointment>>([]);
 
   today = new Date();
   todayDate = '';
-  constructor() {
+  constructor(
+    private httpService: HttpService,
+    private activatedRoute: ActivatedRoute
+  ) {
     this.selectedHours.next(new Set());
 
     this.todayDate = formatDate(this.today, 'dd-MM-yyyy hh:mm:ss a', 'en-US', '+0530');
@@ -48,9 +46,23 @@ export class AppointmentsListComponent {
   }
 
   ngOnInit(): void {
-    this.selectOptions = { cellSelectionMode: 'Box', type: 'Multiple', mode: 'Cell' };
-    this.pageSettings = { pageCount: 5 };
-    this.isSelecting = false;
+    this.httpService.getAppointmentList().subscribe((data: Array<any>) => {
+      this.listOfAppointments.next(data);
+    })
+
+    this.listOfAppointments.subscribe((appointments) => {
+      appointments.map((app) => {
+        const startHour = new Date(app.start).getHours();
+        const finnishHour = new Date(app.finnish).getHours();
+        const startMinute = new Date(app.start).getMinutes();
+        const finnishMinute = new Date(app.finnish).getMinutes();
+        this.cannotBeSelectedHours.next(this.cannotBeSelectedHours.value.add(startHour));
+        this.cannotBeSelectedHours.next(this.cannotBeSelectedHours.value.add(finnishHour));
+        this.cannotBeSelectedMinutes.next(this.cannotBeSelectedMinutes.value.add(startMinute));
+        this.cannotBeSelectedMinutes.next(this.cannotBeSelectedMinutes.value.add(finnishMinute));
+      })
+    })
+
     this.selectedHours.subscribe(value => {
       this.selectedHoursSet = value;
     })

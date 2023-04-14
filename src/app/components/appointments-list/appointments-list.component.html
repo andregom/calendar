@@ -33,8 +33,8 @@
                 handleSelecting
                 (startNewSelection)="startNewSelectionHours($event)"
                 (addToSelection)="selectHourItem($event)" 
-                [selection]="(selectedHoursSet)"
-                [selectedSub]="(selectedHours)"
+                [selected]="(selectedHours)"
+                [cannotBeSelected]="(cannotBeSelectedHours)"
                 [isSelectingSub]="(isSelectingHoursSub)"
                 disabled="true"
             >
@@ -66,8 +66,8 @@
                   handleSelecting
                   (startNewSelection)="startNewSelectionMinutes($event)"
                   (addToSelection)="selectMinuteItem($event)" 
-                  [selection]="(selectedMinutesSet)"
-                  [selectedSub]="(selectedMinutes)"
+                  [selected]="(selectedMinutes)"
+                  [cannotBeSelected]="(cannotBeSelectedMinutes)"
                   [isSelectingSub]="(isSelectingMinutesSub)"
                   disabled="true"
                 >

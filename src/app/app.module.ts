@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { HttpClientModule } from '@angular/common/http';
 
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
@@ -36,6 +37,7 @@ import { ScheduleManagementComponent } from './components/schedule-management/sc
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
+    HttpClientModule,
     MatDatepickerModule,
     MatNativeDateModule,
     MatCardModule,

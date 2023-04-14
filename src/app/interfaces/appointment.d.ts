@@ -1,6 +1,8 @@
-export interface appointment {
+export interface Appointment {
+    id: number;
     title: string;
-    participant?: string;
-    date: Date;
-    desc?: string
+    participants?: string;
+    start: Date;
+    finnish: Date;
+    description?: string
 }

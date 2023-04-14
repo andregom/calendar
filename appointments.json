@@ -1,0 +1,42 @@
+{
+  "appointments": [
+    {
+      "id": 1,
+      "title": "Appointment 1",
+      "start": "04-13-2023",
+      "finnish": "04-13-2023",
+      "description": "Nice!"
+    },
+    {
+      "id": 2,
+      "title": "Appointment 2",
+      "start": "04-13-2023",
+      "finnish": "04-13-2023",
+      "description": "Great view!"
+    },
+    {
+      "title": "New Appointment",
+      "participant": "",
+      "description": "",
+      "start": "2023-04-14T06:45",
+      "finnish": "2023-04-14T07:45",
+      "id": 3
+    },
+    {
+      "title": "New Appointment",
+      "participant": "",
+      "description": "",
+      "start": "2023-04-14T06:46",
+      "finnish": "2023-04-14T07:46",
+      "id": 4
+    },
+    {
+      "title": "New Appointment",
+      "participant": "",
+      "description": "",
+      "start": "2023-04-14T07:30",
+      "finnish": "2023-04-14T08:30",
+      "id": 5
+    }
+  ]
+}
