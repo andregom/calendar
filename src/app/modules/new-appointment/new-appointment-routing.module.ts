@@ -40,7 +40,6 @@ function endsWithDetails(url: UrlSegment[]) {
 }
 
 function endsWithReschedule(url: UrlSegment[]) {
-  console.log('redirected!')
   let ensWith = url[url.length -1].path.match('reschedule') ? ({consumed: url}) : null;
   return ensWith;
 }

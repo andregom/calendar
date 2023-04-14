@@ -51,7 +51,7 @@ export class ScheduleManagementComponent {
   }
 
   drop(event: CdkDragDrop<Appointment[]>) {
-    for(let i = 0; i < this.listOfAppointments.value.length; i++) {
+    for(let i = 0; i <= this.listOfAppointments.value.length; i++) {
       moveItemInArray(this.hours, event.previousIndex + i, event.currentIndex + i);
     }
   }
