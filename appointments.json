@@ -37,6 +37,14 @@
       "start": "2023-04-14T07:30",
       "finnish": "2023-04-14T08:30",
       "id": 5
+    },
+    {
+      "title": "New Appointment",
+      "participant": "",
+      "description": "",
+      "start": "2023-04-14T08:20",
+      "finnish": "2023-04-14T09:20",
+      "id": 6
     }
   ]
 }

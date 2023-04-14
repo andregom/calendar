@@ -4,6 +4,7 @@ import { NewAppointmentComponent } from './new-appointment.component';
 import { AppointmentFormComponent } from '../../components/appointment-form/appointment-form.component';
 import { AppointmentsListComponent } from '../../components/appointments-list/appointments-list.component';
 import { AppointimentDetailsComponent } from 'src/app/components/appointiment-details/appointiment-details.component';
+import { ScheduleManagementComponent } from 'src/app/components/schedule-management/schedule-management.component';
 
 const routes: Routes = [
   {
@@ -17,6 +18,10 @@ const routes: Routes = [
   {
     path: 'new/choose_available',
     component: AppointmentsListComponent
+  },
+  {
+    path: 'reschedule',
+    component: ScheduleManagementComponent
   },
   {
     matcher: matchUploadURL, 
