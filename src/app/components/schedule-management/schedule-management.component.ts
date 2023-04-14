@@ -2,6 +2,7 @@ import { formatDate } from '@angular/common';
 import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { BehaviorSubject } from 'rxjs';
+import { Appointment } from 'src/app/interfaces/appointment';
 import { HttpService } from 'src/app/services/http.service';
 
 @Component({
@@ -14,6 +15,8 @@ export class ScheduleManagementComponent {
   minutes: number[];
 
   selectedHours: BehaviorSubject<Set<number>> = new BehaviorSubject(new Set())
+
+  listOfAppointments: BehaviorSubject<Array<Appointment>> = new BehaviorSubject<Array<Appointment>>([]);
 
   today = new Date();
   todayDate = '';
@@ -29,6 +32,21 @@ export class ScheduleManagementComponent {
 
     // Generate an array of all minutes in an hour
     this.minutes = Array.from({ length: 60 }, (_, i) => i);
+  }
+
+  ngOnInit(): void {
+    this.httpService.getAppointmentList().subscribe((data: Array<any>) => {
+      this.listOfAppointments.next(data);
+    })
+
+    this.listOfAppointments.subscribe((appointments) => {
+      appointments.map((app) => {
+        const startHour = new Date(app.start).getHours();
+        const finnishHour = new Date(app.finnish).getHours();
+        this.selectedHours.next(this.selectedHours.value.add(startHour));
+        this.selectedHours.next(this.selectedHours.value.add(finnishHour));
+      })
+    })
   }
 
 }

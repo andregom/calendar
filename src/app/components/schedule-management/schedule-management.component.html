@@ -26,6 +26,8 @@
             <mat-option
                 *ngFor="let hour of hours"
                 [value]="hour"
+                handleSelecting
+                [selected]="(selectedHours)"
             >
                 <div
                     class="hour hour-{{hour}}"
