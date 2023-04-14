@@ -3,10 +3,10 @@ import { MatOption } from '@angular/material/core'
 import { BehaviorSubject } from 'rxjs';
 
 @Directive({
-    selector: '[handleSelecting]'
+    selector: '[handleRescheduling]'
 })
 
-export class SelectionHandler {
+export class RescheduleHandler {
     @Input() isSelectingSub: BehaviorSubject<boolean> | undefined;
     @Input() selected: BehaviorSubject<Set<number>> | undefined;
     @Input() cannotBeSelected: BehaviorSubject<Set<number>> | undefined;
@@ -56,44 +56,5 @@ export class SelectionHandler {
     deselect() {
         this.removeFromSelection.emit(this.matOption.value);
     }
-
-    @HostListener('mousedown')
-    mousedown() {
-        if (!this.matOption.selected) {
-            this.select();
-            console.log('it was deselected!');
-        }
-        else {
-            this.startNewSelection.emit(this.matOption.value);
-            // this.deselect();
-            console.log('it was selected!');
-            return
-        }
-    }
-
-    //continue selection with mousedown
-    @HostListener('mouseover')
-    mouseover() {
-        if (this.isSelectingSub?.value) {
-            this.select()
-        } else {
-            this.matOption.disabled = false;
-        }
-    }
-
-    @HostListener('mouseleave')
-    mouseleave() {
-        if (!this.matOption.selected && !this.isSelectingSub?.value)
-            this.matOption.disabled = true;
-    }
-
-    // @HostListener('mouseout')
-    // isItSafe() {
-    //     console.log("It really left rigth");
-    // }
-    // @HostListener('mouseout')
-    // messageInput() {
-    //     console.log(`The message input is ${this.message}`);
-    // }
 
 }

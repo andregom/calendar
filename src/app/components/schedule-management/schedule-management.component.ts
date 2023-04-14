@@ -1,7 +1,8 @@
+import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 import { formatDate } from '@angular/common';
 import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, concat } from 'rxjs';
 import { Appointment } from 'src/app/interfaces/appointment';
 import { HttpService } from 'src/app/services/http.service';
 
@@ -47,6 +48,12 @@ export class ScheduleManagementComponent {
         this.selectedHours.next(this.selectedHours.value.add(finnishHour));
       })
     })
+  }
+
+  drop(event: CdkDragDrop<Appointment[]>) {
+    for(let i = 0; i < this.listOfAppointments.value.length; i++) {
+      moveItemInArray(this.hours, event.previousIndex + i, event.currentIndex + i);
+    }
   }
 
 }

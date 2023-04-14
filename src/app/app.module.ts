@@ -21,6 +21,7 @@ import { MatNativeDateModule } from '@angular/material/core';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 
 import { SelectionHandler } from 'src/app/directives/selection-handler.directive';
+import { RescheduleHandler } from 'src/app/directives/reschedule-handler.directive';
 import { ScheduleManagementComponent } from './components/schedule-management/schedule-management.component';
 
 
@@ -31,6 +32,7 @@ import { ScheduleManagementComponent } from './components/schedule-management/sc
     HomeComponent,
     AppointmentsListComponent,
     SelectionHandler,
+    RescheduleHandler,
     ScheduleManagementComponent
   ],
   imports: [

@@ -13,32 +13,29 @@
     </div>
 
     <div class="time-slots">
-        <!-- <mat-select #selector placeholder="Choose an Hour" multiple> -->
             <div class="hours-container">
-                <h1>Hours Available</h1>
-                (Click and drag or select one by one)
-            <!-- <mat-form-field> -->
-            <mat-label>Hours</mat-label>
-            <!-- (click)="deselectIfSelected($event)" -->
-            <div
-              class="hours-slots"
-            >
-            <mat-option
-                *ngFor="let hour of hours"
-                [value]="hour"
-                handleSelecting
-                [selected]="(selectedHours)"
-            >
+                <h1>Booked Hours</h1>
+                <mat-label>Hours</mat-label>
+                <div
+                    class="hours-slots"
+                    cdkDropList
+                    (cdkDropListDropped)="drop($event)"
+                >
+                    <mat-option
+                        *ngFor="let hour of hours"
+                        [value]="hour"
+                        cdkDrag
+                        handleRescheduling
+                        [selected]="(selectedHours)"
+                    >
                 <div
                     class="hour hour-{{hour}}"
                 >
                     {{ hour }}
                 </div>
                 </mat-option>
-            <!-- </mat-select> -->
             </div>
         </div>
-        <!-- <mat-radio-group> -->
     </div>
 </div>
 <button class="delete-appointiment">Delete Appointiment</button>
