@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { formatDate } from '@angular/common';
-import { BehaviorSubject, Subject } from 'rxjs';
+import { BehaviorSubject } from 'rxjs';
 import { HttpService } from 'src/app/services/http.service';
 import { Appointment } from 'src/app/interfaces/appointment';
 import { ActivatedRoute } from '@angular/router';
@@ -14,6 +14,7 @@ import { ActivatedRoute } from '@angular/router';
 export class AppointmentsListComponent {
   hours: number[];
   minutes: number[];
+  id: string | undefined;
 
   selectedMinutesSet: Set<number> = new Set();
   selectedHoursSet: Set<number> = new Set();
@@ -29,12 +30,16 @@ export class AppointmentsListComponent {
 
   listOfAppointments: BehaviorSubject<Array<Appointment>> = new BehaviorSubject<Array<Appointment>>([]);
 
+
+  
   today = new Date();
   todayDate = '';
   constructor(
     private httpService: HttpService,
     private activatedRoute: ActivatedRoute
   ) {
+    const queryParams = Object.assign({}, this.activatedRoute.snapshot.queryParams);
+    this.id = queryParams['id'];
     this.selectedHours.next(new Set());
 
     this.todayDate = formatDate(this.today, 'dd-MM-yyyy hh:mm:ss a', 'en-US', '+0530');
@@ -46,26 +51,35 @@ export class AppointmentsListComponent {
   }
 
   ngOnInit(): void {
-    this.httpService.getAppointmentList().subscribe((data: Array<any>) => {
-      this.listOfAppointments.next(data);
+    this.httpService.getAppointmentList().subscribe((data: Array<Appointment>) => {
+      const listOfAppointments = data.map((app: Appointment): Appointment => {
+        const startDate = new Date(app.start);
+        const finnishDate = new Date(app.finnish);
+        return {...app, start: startDate, finnish: finnishDate}
+    })
+      this.listOfAppointments.next(listOfAppointments);
     })
 
     this.listOfAppointments.subscribe((appointments) => {
       appointments.map((app) => {
-        const startHour = new Date(app.start).getHours();
-        const finnishHour = new Date(app.finnish).getHours();
-        const startMinute = new Date(app.start).getMinutes();
-        const finnishMinute = new Date(app.finnish).getMinutes();
-        this.cannotBeSelectedHours.next(this.cannotBeSelectedHours.value.add(startHour));
-        this.cannotBeSelectedHours.next(this.cannotBeSelectedHours.value.add(finnishHour));
-        this.cannotBeSelectedMinutes.next(this.cannotBeSelectedMinutes.value.add(startMinute));
-        this.cannotBeSelectedMinutes.next(this.cannotBeSelectedMinutes.value.add(finnishMinute));
+        const startHour = app.start.getHours();
+        const finnishHour = app.finnish.getHours();
+        const startMinute = app.start.getMinutes();
+        const finnishMinute = app.finnish.getMinutes();
+
+        this.fillSpacesBetween(startHour, finnishHour, this.cannotBeSelectedHours);
+        this.fillSpacesBetween(startMinute, finnishMinute, this.cannotBeSelectedMinutes);
       })
     })
 
     this.selectedHours.subscribe(value => {
       this.selectedHoursSet = value;
     })
+  }
+
+  fillSpacesBetween(start: number, finnish: number, timeUnity: BehaviorSubject<Set<number>>) {
+    for (let time = start; time <= finnish; time++)
+      timeUnity.next(timeUnity.value.add(time));
   }
 
   startSelectingHours(event: any) {
