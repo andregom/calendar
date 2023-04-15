@@ -4,14 +4,14 @@
       "id": 1,
       "title": "Appointment 1",
       "start": "2023-04-04T06:45",
-      "finnish": "2023-04-04T07:45",
+      "finnish": "2023-04-04T09:45",
       "description": "Nice!"
     },
     {
       "id": 2,
       "title": "Appointment 2",
       "start": "2023-04-24T06:45",
-      "finnish": "2023-04-24T07:45",
+      "finnish": "2023-04-24T09:45",
       "description": "Great view!"
     },
     {
@@ -19,7 +19,7 @@
       "participant": "",
       "description": "",
       "start": "2023-04-14T06:45",
-      "finnish": "2023-04-14T07:45",
+      "finnish": "2023-04-14T09:45",
       "id": 3
     },
     {
@@ -27,24 +27,8 @@
       "participant": "",
       "description": "",
       "start": "2023-04-14T06:46",
-      "finnish": "2023-04-14T07:46",
+      "finnish": "2023-04-14T09:46",
       "id": 4
-    },
-    {
-      "title": "New Appointment",
-      "participant": "",
-      "description": "",
-      "start": "2023-04-14T07:30",
-      "finnish": "2023-04-14T08:30",
-      "id": 5
-    },
-    {
-      "title": "New Appointment",
-      "participant": "",
-      "description": "",
-      "start": "2023-04-14T08:20",
-      "finnish": "2023-04-14T09:20",
-      "id": 6
     },
     {
       "title": "New Appointment",
@@ -85,6 +69,238 @@
       "start": "2023-04-14T21:57",
       "finnish": "2023-04-14T22:57",
       "id": 11
+    },
+    {
+      "title": "New Appointment",
+      "participant": "",
+      "description": "",
+      "start": "2023-04-14T23:42",
+      "finnish": "2023-04-15T00:42",
+      "id": 12
+    },
+    {
+      "title": "New Appointment",
+      "participant": "",
+      "description": "",
+      "start": "2023-04-14T23:45",
+      "finnish": "2023-04-15T00:45",
+      "id": 13
+    },
+    {
+      "title": "New Appointment",
+      "participant": "",
+      "description": "",
+      "start": "2023-04-14T23:45",
+      "finnish": "2023-04-15T00:45",
+      "id": 14
+    },
+    {
+      "title": "New Appointment",
+      "participant": "",
+      "description": "",
+      "start": "2023-04-14T23:46",
+      "finnish": "2023-04-15T00:46",
+      "id": 15
+    },
+    {
+      "title": "New Appointment",
+      "participant": "",
+      "description": "",
+      "start": "2023-04-14T23:49",
+      "finnish": "2023-04-15T00:49",
+      "id": 16
+    },
+    {
+      "title": "New Appointment",
+      "participant": "",
+      "description": "",
+      "start": "2023-04-14T23:50",
+      "finnish": "2023-04-15T00:50",
+      "id": 17
+    },
+    {
+      "title": "New Appointment",
+      "participant": "",
+      "description": "",
+      "start": "2023-04-14T23:51",
+      "finnish": "2023-04-15T00:51",
+      "id": 18
+    },
+    {
+      "title": "New Appointment",
+      "participant": "",
+      "description": "",
+      "start": "2023-04-14T23:51",
+      "finnish": "2023-04-15T00:51",
+      "id": 19
+    },
+    {
+      "title": "New Appointment",
+      "participant": "",
+      "description": "",
+      "start": "2023-04-14T23:52",
+      "finnish": "2023-04-15T00:52",
+      "id": 20
+    },
+    {
+      "title": "New Appointment",
+      "participant": "",
+      "description": "",
+      "start": "2023-04-14T23:53",
+      "finnish": "2023-04-15T00:53",
+      "id": 21
+    },
+    {
+      "title": "New Appointment",
+      "participant": "",
+      "description": "",
+      "start": "2023-04-14T23:55",
+      "finnish": "2023-04-15T00:55",
+      "id": 22
+    },
+    {
+      "title": "New Appointment",
+      "participant": "",
+      "description": "",
+      "start": "2023-04-14T23:58",
+      "finnish": "2023-04-15T00:58",
+      "id": 23
+    },
+    {
+      "title": "New Appointment",
+      "participant": "",
+      "description": "",
+      "start": "2023-04-14T23:58",
+      "finnish": "2023-04-15T00:58",
+      "id": 24
+    },
+    {
+      "title": "New Appointment",
+      "participant": "",
+      "description": "",
+      "start": "2023-04-15T00:00",
+      "finnish": "2023-04-15T01:00",
+      "id": 25
+    },
+    {
+      "title": "New Appointment",
+      "participant": "",
+      "description": "",
+      "start": "2023-04-15T00:01",
+      "finnish": "2023-04-15T01:01",
+      "id": 26
+    },
+    {
+      "title": "New Appointment",
+      "participant": "",
+      "description": "",
+      "start": "2023-04-15T00:02",
+      "finnish": "2023-04-15T01:02",
+      "id": 27
+    },
+    {
+      "title": "New Appointment",
+      "participant": "",
+      "description": "",
+      "start": "2023-04-15T00:03",
+      "finnish": "2023-04-15T01:03",
+      "id": 28
+    },
+    {
+      "title": "New Appointment",
+      "participant": "",
+      "description": "",
+      "start": "2023-04-15T00:04",
+      "finnish": "2023-04-15T01:04",
+      "id": 29
+    },
+    {
+      "title": "New Appointment",
+      "participant": "",
+      "description": "",
+      "start": "2023-04-15T00:05",
+      "finnish": "2023-04-15T01:05",
+      "id": 30
+    },
+    {
+      "title": "New Appointment",
+      "participant": "",
+      "description": "",
+      "start": "2023-04-15T00:06",
+      "finnish": "2023-04-15T01:06",
+      "id": 31
+    },
+    {
+      "title": "New Appointment",
+      "participant": "",
+      "description": "",
+      "start": "2023-04-15T00:07",
+      "finnish": "2023-04-15T01:07",
+      "id": 32
+    },
+    {
+      "title": "New Appointment",
+      "participant": "",
+      "description": "",
+      "start": "2023-04-15T00:08",
+      "finnish": "2023-04-15T01:08",
+      "id": 33
+    },
+    {
+      "title": "New Appointment",
+      "participant": "",
+      "description": "",
+      "start": "2023-04-15T00:08",
+      "finnish": "2023-04-15T01:08",
+      "id": 34
+    },
+    {
+      "title": "New Appointment",
+      "participant": "",
+      "description": "",
+      "start": "2023-04-15T00:09",
+      "finnish": "2023-04-15T01:09",
+      "id": 35
+    },
+    {
+      "title": "New Appointment",
+      "participant": "",
+      "description": "",
+      "start": "2023-04-15T00:16",
+      "finnish": "2023-04-15T01:16",
+      "id": 36
+    },
+    {
+      "title": "New Appointment",
+      "participant": "",
+      "description": "",
+      "start": "2023-04-15T00:23",
+      "finnish": "2023-04-15T01:23",
+      "id": 37
+    },
+    {
+      "title": "New Appointment",
+      "participant": "",
+      "description": "",
+      "start": "2023-04-15T00:56",
+      "finnish": "2023-04-15T01:56",
+      "id": 38
+    },
+    {
+      "title": "New Appointment",
+      "participant": "",
+      "description": "",
+      "start": "2023-04-15T01:15",
+      "finnish": "2023-04-15T02:15",
+      "id": 39
+    },
+    {
+      "title": "New Appointment",
+      "participant": "",
+      "description": "",
+      "start": "2023-04-15T01:19",
+      "finnish": "2023-04-15T02:19",
+      "id": 40
     }
   ]
 }
