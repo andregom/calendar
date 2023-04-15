@@ -11,6 +11,8 @@ export class SelectionHandler {
     @Input() selected: BehaviorSubject<Set<number>> | undefined;
     @Input() cannotBeSelected: BehaviorSubject<Set<number>> | undefined;
 
+    @Input() content: string | undefined;
+
     @Output() addToSelection: EventEmitter<number> = new EventEmitter();
     @Output() removeFromSelection: EventEmitter<number> = new EventEmitter();
     @Output() startNewSelection: EventEmitter<number> = new EventEmitter();
@@ -61,13 +63,9 @@ export class SelectionHandler {
     mousedown() {
         if (!this.matOption.selected) {
             this.select();
-            console.log('it was deselected!');
         }
         else {
             this.startNewSelection.emit(this.matOption.value);
-            // this.deselect();
-            console.log('it was selected!');
-            return
         }
     }
 
