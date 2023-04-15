@@ -13,10 +13,15 @@
             ></mat-calendar>
         </mat-card>
         <button
-          class="book"
-          [routerLink]="['details/']"
+        class="book"
+        [routerLink]="['details/']"
         >
             Reschedule
+        </button>
+        <button
+            (click)="deleteAppointment()"
+            class="book delete-appointiment">
+            Delete Appointiment
         </button>
     </div>
 
@@ -46,4 +51,4 @@
         </div>
     </div>
 </div>
-<button class="delete-appointiment">Delete Appointiment</button>
+

@@ -29,7 +29,8 @@ export class ScheduleManagementComponent {
   todayDate = '';
   constructor(
     private httpService: HttpService,
-    private activatedRoute: ActivatedRoute
+    private activatedRoute: ActivatedRoute,
+    private router: Router
   ) {
     this.todayDate = formatDate(this.today, 'dd-MM-yyyy hh:mm:ss a', 'en-US', '+0530');
 
@@ -100,6 +101,12 @@ export class ScheduleManagementComponent {
     });
     this.selectedHours.next(newSet);
     console.log(this.selectedHours.value);
+  }
+
+  deleteAppointment() {
+    const queryParams = Object.assign({}, this.activatedRoute.snapshot.queryParams);
+    queryParams['id'] !== undefined && this.httpService.deleteAppointment(queryParams['id']);
+    this.router.navigate([this.router.url])
   }
 
 }
