@@ -2,7 +2,7 @@ import { formatDate } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Observable, map } from 'rxjs';
 import { HttpService } from 'src/app/services/http.service';
 
@@ -45,16 +45,15 @@ export class AppointmentFormComponent implements OnInit {
   }
 
   goToTimeSlots(partialAppointmanet: any) {
-    this.router.navigate([this.router.url, 'choose_available'], {state: {...partialAppointmanet}});
+    const queryParams = Object.assign({}, this.activatedRoute.snapshot.queryParams);
+    this.router.navigate([this.router.url, 'choose_available'], { queryParams, state: {...partialAppointmanet}});
     console.log(partialAppointmanet);
   }
 
-  onSubmit(appointment: any) {
-      this.httpService.createAppointment(appointment).subscribe((res) => {
-        console.log(res);
+  async onSubmit(appointment: any) {
+      await this.httpService.createAppointment(appointment).subscribe((res) => {
+        this.router.navigate([this.router.url, 'details'], {queryParams: { id: res.id }, state: {...appointment}});
       });
-      this.router.navigate([this.router.url, 'details'], {state: {...appointment}});
-      console.log(appointment);
   }
 
 }

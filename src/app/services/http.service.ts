@@ -17,10 +17,15 @@ export class HttpService {
       params: {},
     })
   }
+
+  getAppointment(id: number): Observable<Appointment> {
+    return this.http.get<Appointment>(`${env.BASE_URL}/appointments/${id}`, {
+      params: {},
+    })
+  }
   
-  createAppointment(appointment: Appointment): Observable<Array<Appointment>> {
-    console.log(appointment);
-    return this.http.post<Array<Appointment>>(`${env.BASE_URL}/appointments`, appointment, {
+  createAppointment(appointment: Appointment): Observable<Appointment> {
+    return this.http.post<Appointment>(`${env.BASE_URL}/appointments`, appointment, {
       params: {},
     })
   }
