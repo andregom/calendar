@@ -13,7 +13,7 @@ import { HttpService } from 'src/app/services/http.service';
   styleUrls: ['./schedule-management.component.scss']
 })
 export class ScheduleManagementComponent {
-  @Output() updateCalendarView: EventEmitter<number> = new EventEmitter();
+  id: string | undefined;
 
   hours: number[];
   minutes: number[];
@@ -24,6 +24,9 @@ export class ScheduleManagementComponent {
   selectedDays: BehaviorSubject<Set<number>> = new BehaviorSubject(new Set());
   selectedHours: BehaviorSubject<Set<number>> = new BehaviorSubject(new Set());
 
+  cannotBeSelectedMinutes: BehaviorSubject<Set<number>> = new BehaviorSubject(new Set());
+  cannotBeSelectedHours: BehaviorSubject<Set<number>> = new BehaviorSubject(new Set());
+
   listOfAppointments: BehaviorSubject<Array<Appointment>> = new BehaviorSubject<Array<Appointment>>([]);
 
   today = new Date();
@@ -33,6 +36,9 @@ export class ScheduleManagementComponent {
     private activatedRoute: ActivatedRoute,
     private router: Router
   ) {
+    const queryParams = Object.assign({}, this.activatedRoute.snapshot.queryParams);
+    this.id = queryParams['id'];
+
     this.todayDate = formatDate(this.today, 'dd-MM-yyyy hh:mm:ss a', 'en-US', '+0530');
 
     this.selectedDay = new BehaviorSubject(this.today.getDate());
@@ -68,8 +74,18 @@ export class ScheduleManagementComponent {
           if (startDate.getDate() === day) {
             const startHour = startDate.getHours();
             const finnishHour = finnishDate.getHours();
-            this.selectedHours.next(this.selectedHours.value.add(startHour));
-            this.selectedHours.next(this.selectedHours.value.add(finnishHour));
+            if (this.id) {
+              if (app.id === Number(this.id)) {
+                this.selectedHours.next(this.selectedHours.value.add(startHour));
+                this.selectedHours.next(this.selectedHours.value.add(finnishHour));
+              } else {
+                this.cannotBeSelectedHours.next(this.cannotBeSelectedHours.value.add(startHour));
+                this.cannotBeSelectedHours.next(this.cannotBeSelectedHours.value.add(finnishHour));
+              }
+            } else {
+              this.selectedHours.next(this.selectedHours.value.add(startHour));
+              this.selectedHours.next(this.selectedHours.value.add(finnishHour));
+            }
           }
         })
       })
@@ -91,6 +107,7 @@ export class ScheduleManagementComponent {
     this.selectedHours.value.forEach((hour: number) => {
       hour + gap >= 0 && newSet.add(hour + gap)
     });
+    console.log(newSet)
     this.selectedHours.next(newSet);
   }
 

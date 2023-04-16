@@ -37,9 +37,10 @@
                     <mat-option
                         *ngFor="let hour of hours"
                         [value]="hour"
-                        cdkDrag
+                        cdkDrag="true"
                         handleRescheduling
                         [selected]="(selectedHours)"
+                        [cannotBeSelected]="cannotBeSelectedHours"
                     >
                 <div
                     class="hour hour-{{hour}}"
