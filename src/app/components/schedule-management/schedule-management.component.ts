@@ -1,6 +1,7 @@
 import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 import { formatDate } from '@angular/common';
 import { Component, EventEmitter, Output } from '@angular/core';
+import { MatCalendarUserEvent } from '@angular/material/datepicker';
 import { ActivatedRoute, Router } from '@angular/router';
 import { BehaviorSubject } from 'rxjs';
 import { Appointment } from 'src/app/interfaces/appointment';
@@ -58,7 +59,6 @@ export class ScheduleManagementComponent {
         const finnishDay = finnishDate.getDate();
         this.selectedDays.next(this.selectedDays.value.add(startDay));
         this.selectedDays.next(this.selectedDays.value.add(finnishDay));
-        this.updateView();
       })
 
       this.selectedDay?.subscribe((day: number) => {
@@ -82,12 +82,8 @@ export class ScheduleManagementComponent {
     return this.selectedDays.value.has(date.getDate());
   }
 
-  selectDay(event: number) {
-    this.selectedDay?.next(event);
-  }
-
-  updateView() {
-    this.updateCalendarView.emit();
+  selectDay(event: MatCalendarUserEvent<Date>) {
+    this.selectedDay?.next(event.value.getDate());
   }
 
   drop(event: CdkDragDrop<Appointment[]>) {

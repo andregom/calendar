@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { formatDate } from '@angular/common';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, forkJoin } from 'rxjs';
 import { HttpService } from 'src/app/services/http.service';
 import { Appointment } from 'src/app/interfaces/appointment';
 import { ActivatedRoute } from '@angular/router';
@@ -31,7 +31,7 @@ export class AppointmentsListComponent {
   listOfAppointments: BehaviorSubject<Array<Appointment>> = new BehaviorSubject<Array<Appointment>>([]);
 
 
-  
+
   today = new Date();
   todayDate = '';
   constructor(
@@ -55,8 +55,8 @@ export class AppointmentsListComponent {
       const listOfAppointments = data.map((app: Appointment): Appointment => {
         const startDate = new Date(app.start);
         const finnishDate = new Date(app.finnish);
-        return {...app, start: startDate, finnish: finnishDate}
-    })
+        return { ...app, start: startDate, finnish: finnishDate }
+      })
       this.listOfAppointments.next(listOfAppointments);
     })
 

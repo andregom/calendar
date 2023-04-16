@@ -30,5 +30,6 @@ export class DateSelectioHandlerDirective implements OnInit {
     const selecteDate = this.matCalendar.activeDate;
     this.selectDay.emit(selecteDate.getDate());
   }
+  
 
 }

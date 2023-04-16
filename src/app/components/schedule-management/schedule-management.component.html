@@ -6,8 +6,8 @@
               [ariaMultiSelectable]="'true'"
               [startView]="'month'"
               [(selected)]="todayDate"
+              (_userSelection)="selectDay($event)"
               appDateSelectioHandler
-              (selectDay)="selectDay($event)"
               [selectedDates]="(selectedDates)"
               [selectedDays]="(selectedDays)"
             ></mat-calendar>
