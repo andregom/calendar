@@ -35,12 +35,12 @@ const routes: Routes = [
 ];
 
 function endsWithDetails(url: UrlSegment[]) {
-  let ensWith = url[url.length -1].path.match('details') ? ({consumed: url}) : null;
+  const ensWith = url[url.length -1].path.match('details') ? ({consumed: url}) : null;
   return ensWith;
 }
 
 function endsWithReschedule(url: UrlSegment[]) {
-  let ensWith = url[url.length -1].path.match('reschedule') ? ({consumed: url}) : null;
+  const ensWith = url[url.length -1].path.match('reschedule') ? ({consumed: url}) : null;
   return ensWith;
 }
 

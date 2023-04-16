@@ -1,4 +1,4 @@
-import { Directive, ElementRef, EventEmitter, HostListener, Input, Output } from '@angular/core'
+import { Directive, EventEmitter, Input, Output } from '@angular/core'
 import { MatOption } from '@angular/material/core'
 import { BehaviorSubject } from 'rxjs';
 

@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { formatDate } from '@angular/common';
-import { BehaviorSubject, forkJoin } from 'rxjs';
+import { BehaviorSubject } from 'rxjs';
 import { HttpService } from 'src/app/services/http.service';
 import { Appointment } from 'src/app/interfaces/appointment';
 import { ActivatedRoute } from '@angular/router';
@@ -71,8 +71,6 @@ export class AppointmentsListComponent {
       this.cannotBeSelectedMinutes.next(new Set());
       this.listOfAppointments.subscribe((appointments) => {
         appointments.map((app) => {
-          // console.log(this.cannotBeSelectedHours.value);
-          // console.log(day, app.start.getDate())
           if (app.start.getDate() === day) {
             const startHour = app.start.getHours();
             const finnishHour = app.finnish.getHours();
@@ -82,7 +80,6 @@ export class AppointmentsListComponent {
             this.fillSpacesBetween(startHour, finnishHour, this.cannotBeSelectedHours);
             this.fillSpacesBetween(startMinute, finnishMinute, this.cannotBeSelectedMinutes);
           }
-          // console.log(this.cannotBeSelectedHours.value);
         })
       })
     })
@@ -134,8 +131,8 @@ export class AppointmentsListComponent {
     const set = setSubscription.value;
     const minMax = [...set].sort();
 
-    var arr: Set<number> = new Set()
-    var prev: any = undefined;
+    const arr: Set<number> = new Set()
+    let prev: any = undefined;
     for (let i = 0; i < minMax.length; i++) {
       const el = minMax[i];
       if (prev !== undefined && el > prev + 1) {
@@ -163,6 +160,7 @@ export class AppointmentsListComponent {
 
   change(event: any): void {
     if (event.isUserInput) {
+      //User selected day
     }
   }
 }

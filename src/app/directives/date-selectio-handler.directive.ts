@@ -1,5 +1,5 @@
-import { AfterContentInit, AfterViewChecked, Directive, ElementRef, EventEmitter, HostListener, Input, OnInit, Output, Renderer2 } from '@angular/core';
-import { MatCalendar, MatCalendarCell } from '@angular/material/datepicker';
+import { AfterViewChecked, Directive, ElementRef, Input, OnInit, Renderer2 } from '@angular/core';
+import { MatCalendar } from '@angular/material/datepicker';
 import { BehaviorSubject } from 'rxjs';
 
 @Directive({
@@ -20,21 +20,22 @@ export class DateSelectioHandlerDirective implements OnInit, AfterViewChecked {
   }
 
   ngOnInit(): void {
+    //TODO
   }
 
   ngAfterViewChecked(): void {
-    for (let index in this.matCalendar.monthSelected) {
+    for (const index in this.matCalendar.monthSelected) {
 
     }
-    let HeaderElsClass = this.elRef.nativeElement.getElementsByClassName('mat-calendar-body-cell')
+    const HeaderElsClass = this.elRef.nativeElement.getElementsByClassName('mat-calendar-body-cell')
     // let HeaderElsClass: MatCalendarCell<Date>[][] = this.matCalendar.monthView._matCalendarBody.rows;
-    let orderDate = Array.from(this.selectedDates.value);
+    const orderDate = Array.from(this.selectedDates.value);
     // console.log(this.selectedDates.value);
     // tempOrderDate is epoch array, i convert from epoch to date
 
-    for (let index in HeaderElsClass) {
+    for (const index in HeaderElsClass) {
       if(typeof HeaderElsClass[index] === 'object') {
-        let headerClass = HeaderElsClass;
+        const headerClass = HeaderElsClass;
 
         orderDate.find(each => {
           console.log(each.getDate(), headerClass[index].children[0].textContent);

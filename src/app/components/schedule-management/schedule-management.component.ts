@@ -1,6 +1,6 @@
-import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
+import { CdkDragDrop } from '@angular/cdk/drag-drop';
 import { formatDate } from '@angular/common';
-import { Component, EventEmitter, Output } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { MatCalendarUserEvent } from '@angular/material/datepicker';
 import { ActivatedRoute, Router } from '@angular/router';
 import { BehaviorSubject } from 'rxjs';
@@ -12,7 +12,7 @@ import { HttpService } from 'src/app/services/http.service';
   templateUrl: './schedule-management.component.html',
   styleUrls: ['./schedule-management.component.scss']
 })
-export class ScheduleManagementComponent {
+export class ScheduleManagementComponent implements OnInit {
   id: string | undefined;
 
   hours: number[];
