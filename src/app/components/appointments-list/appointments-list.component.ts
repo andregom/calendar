@@ -97,12 +97,12 @@ export class AppointmentsListComponent {
   fillSpacesBetween(start: number, finnish: number, timeUnity: BehaviorSubject<Set<number>>) {
     for (let time = start; time <= finnish; time++)
       timeUnity.next(timeUnity.value.add(time));
-    // console.log(timeUnity.value)
   }
 
   selectDay(event: MatCalendarUserEvent<Date>) {
     this.selectedDay.next(event.value.getDate());
     this.selectedHours.next(new Set());
+    this.selectedMinutes.next(new Set());
   }
 
   startSelectingHours(event: any) {

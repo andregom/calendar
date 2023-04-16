@@ -4,7 +4,7 @@
         <mat-card class="demo-inline-calendar-card">
             <mat-calendar
               [ariaMultiSelectable]="'true'"
-              [startView]="'month'"
+              (startView)="'month'"
               [(selected)]="todayDate"
               (_userSelection)="selectDay($event)"
               appDateSelectioHandler

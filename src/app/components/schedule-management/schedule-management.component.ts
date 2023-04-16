@@ -92,7 +92,6 @@ export class ScheduleManagementComponent {
       hour + gap >= 0 && newSet.add(hour + gap)
     });
     this.selectedHours.next(newSet);
-    console.log(this.selectedHours.value);
   }
 
   deleteAppointment() {
