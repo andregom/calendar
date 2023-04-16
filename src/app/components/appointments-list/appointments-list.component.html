@@ -43,7 +43,7 @@
                 disabled="true"
             >
                 <div
-                    class="hour hour-{{hour}}"
+                    class="hour hour-{{ hour  | number: '1.2-2' }}"
                 >
                     {{ hour }}
                 </div>

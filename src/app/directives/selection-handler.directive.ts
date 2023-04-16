@@ -29,7 +29,7 @@ export class SelectionHandler {
             if (isBooked) {
                 this.matOption._getHostElement().children[0].textContent = "Booked";
             } else {
-                this.matOption._getHostElement().children[0].textContent = this.matOption.value;
+                this.matOption._getHostElement().children[0].textContent = `${this.matOption.value}:00`;
             }
         })
 

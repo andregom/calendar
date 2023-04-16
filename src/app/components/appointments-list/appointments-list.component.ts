@@ -27,8 +27,8 @@ export class AppointmentsListComponent {
   selectedMinutes: BehaviorSubject<Set<number>> = new BehaviorSubject(new Set())
   selectedHours: BehaviorSubject<Set<number>> = new BehaviorSubject(new Set())
 
-  cannotBeSelectedMinutes: BehaviorSubject<Set<number>> = new BehaviorSubject(new Set())
-  cannotBeSelectedHours: BehaviorSubject<Set<number>> = new BehaviorSubject(new Set())
+  cannotBeSelectedMinutes: BehaviorSubject<Set<number>> = new BehaviorSubject(new Set());
+  cannotBeSelectedHours: BehaviorSubject<Set<number>> = new BehaviorSubject(new Set());
 
   isSelectingHoursSub: BehaviorSubject<boolean> = new BehaviorSubject(false);
   isSelectingMinutesSub: BehaviorSubject<boolean> = new BehaviorSubject(false);
