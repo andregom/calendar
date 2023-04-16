@@ -7,7 +7,6 @@ import { BehaviorSubject } from 'rxjs';
 })
 
 export class RescheduleHandler {
-    @Input() isSelectingSub: BehaviorSubject<boolean> | undefined;
     @Input() selected: BehaviorSubject<Set<number>> | undefined;
     @Input() cannotBeSelected: BehaviorSubject<Set<number>> | undefined;
 

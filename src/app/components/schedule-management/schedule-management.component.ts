@@ -35,7 +35,7 @@ export class ScheduleManagementComponent {
   ) {
     this.todayDate = formatDate(this.today, 'dd-MM-yyyy hh:mm:ss a', 'en-US', '+0530');
 
-    this.selectedDay = new BehaviorSubject(this.today.getDate())
+    this.selectedDay = new BehaviorSubject(this.today.getDate());
     // Generate an array of all hours in a day (24-hour format)
     this.hours = Array.from({ length: 24 }, (_, i) => i);
 
@@ -52,7 +52,6 @@ export class ScheduleManagementComponent {
       appointments.map((app) => {
         const startDate = new Date(app.start);
         const finnishDate = new Date(app.finnish);
-        // if (!Number.isNaN(startDate.getDate()) && !Number.isNaN(finnishDate.getDate())) {
         this.selectedDates.next(this.selectedDates.value.add(startDate));
         this.selectedDates.next(this.selectedDates.value.add(finnishDate));
         const startDay = startDate.getDate();

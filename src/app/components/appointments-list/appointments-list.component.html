@@ -4,6 +4,7 @@
         <mat-card class="demo-inline-calendar-card">
             <mat-calendar
               appDateSelectioHandler
+              (_userSelection)="(selectDay($event))"
               [(selected)]="todayDate"
             ></mat-calendar>
         </mat-card>

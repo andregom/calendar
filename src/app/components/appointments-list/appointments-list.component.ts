@@ -4,6 +4,7 @@ import { BehaviorSubject, forkJoin } from 'rxjs';
 import { HttpService } from 'src/app/services/http.service';
 import { Appointment } from 'src/app/interfaces/appointment';
 import { ActivatedRoute } from '@angular/router';
+import { MatCalendarUserEvent } from '@angular/material/datepicker';
 
 @Component({
   selector: 'app-appointments-list',
@@ -12,9 +13,13 @@ import { ActivatedRoute } from '@angular/router';
 })
 
 export class AppointmentsListComponent {
+  id: string | undefined;
+
   hours: number[];
   minutes: number[];
-  id: string | undefined;
+
+  selectedDay: BehaviorSubject<number>;
+
 
   selectedMinutesSet: Set<number> = new Set();
   selectedHoursSet: Set<number> = new Set();
@@ -40,9 +45,10 @@ export class AppointmentsListComponent {
   ) {
     const queryParams = Object.assign({}, this.activatedRoute.snapshot.queryParams);
     this.id = queryParams['id'];
-    this.selectedHours.next(new Set());
 
     this.todayDate = formatDate(this.today, 'dd-MM-yyyy hh:mm:ss a', 'en-US', '+0530');
+
+    this.selectedDay = new BehaviorSubject(this.today.getDate());
     // Generate an array of all hours in a day (24-hour format)
     this.hours = Array.from({ length: 24 }, (_, i) => i);
 
@@ -60,26 +66,43 @@ export class AppointmentsListComponent {
       this.listOfAppointments.next(listOfAppointments);
     })
 
-    this.listOfAppointments.subscribe((appointments) => {
-      appointments.map((app) => {
-        const startHour = app.start.getHours();
-        const finnishHour = app.finnish.getHours();
-        const startMinute = app.start.getMinutes();
-        const finnishMinute = app.finnish.getMinutes();
+    this.selectedDay?.subscribe((day: number) => {
+      this.cannotBeSelectedHours.next(new Set());
+      this.cannotBeSelectedMinutes.next(new Set());
+      this.listOfAppointments.subscribe((appointments) => {
+        appointments.map((app) => {
+          // console.log(this.cannotBeSelectedHours.value);
+          // console.log(day, app.start.getDate())
+          if (app.start.getDate() === day) {
+            const startHour = app.start.getHours();
+            const finnishHour = app.finnish.getHours();
+            const startMinute = app.start.getMinutes();
+            const finnishMinute = app.finnish.getMinutes();
 
-        this.fillSpacesBetween(startHour, finnishHour, this.cannotBeSelectedHours);
-        this.fillSpacesBetween(startMinute, finnishMinute, this.cannotBeSelectedMinutes);
+            this.fillSpacesBetween(startHour, finnishHour, this.cannotBeSelectedHours);
+            this.fillSpacesBetween(startMinute, finnishMinute, this.cannotBeSelectedMinutes);
+          }
+          // console.log(this.cannotBeSelectedHours.value);
+        })
       })
     })
 
     this.selectedHours.subscribe(value => {
       this.selectedHoursSet = value;
     })
+
+
   }
 
   fillSpacesBetween(start: number, finnish: number, timeUnity: BehaviorSubject<Set<number>>) {
     for (let time = start; time <= finnish; time++)
       timeUnity.next(timeUnity.value.add(time));
+    // console.log(timeUnity.value)
+  }
+
+  selectDay(event: MatCalendarUserEvent<Date>) {
+    this.selectedDay.next(event.value.getDate());
+    this.selectedHours.next(new Set());
   }
 
   startSelectingHours(event: any) {
@@ -124,7 +147,7 @@ export class AppointmentsListComponent {
       }
       prev = el;
     }
-    console.log(arr);
+    // console.log(arr);
     setSubscription.next(new Set(arr));
   }
 

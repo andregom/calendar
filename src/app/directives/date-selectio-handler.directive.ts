@@ -6,7 +6,6 @@ import { BehaviorSubject } from 'rxjs';
   selector: '[appDateSelectioHandler]'
 })
 export class DateSelectioHandlerDirective implements OnInit {
-  @Output() selectDay: EventEmitter<number> = new EventEmitter();
 
   @Input() selectedDates: BehaviorSubject<Set<Date>>;
   @Input() selectedDays: BehaviorSubject<Set<number>>;
@@ -20,16 +19,7 @@ export class DateSelectioHandlerDirective implements OnInit {
   }
 
   ngOnInit(): void {
-    console.table(this.elementRef.nativeElement)
+
   }
-  
-  
-  
-  @HostListener('click')
-  click() {
-    const selecteDate = this.matCalendar.activeDate;
-    this.selectDay.emit(selecteDate.getDate());
-  }
-  
 
 }

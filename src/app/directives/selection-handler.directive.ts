@@ -24,10 +24,13 @@ export class SelectionHandler {
     }
 
     ngOnInit() {
+        console.log(this.cannotBeSelected?.value)
         this.cannotBeSelected?.subscribe(value => {
             const isBooked = value && this.cannotBeSelected?.value.has(this.matOption.value);
             if (isBooked) {
-                this.matOption._getHostElement().textContent = "Booked"
+                this.matOption._getHostElement().children[0].textContent = "Booked";
+            } else {
+                this.matOption._getHostElement().children[0].textContent = this.matOption.value;
             }
         })
 
