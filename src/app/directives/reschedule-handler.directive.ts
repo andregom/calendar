@@ -1,4 +1,4 @@
-import { Directive, EventEmitter, Input, Output } from '@angular/core'
+import { Directive, EventEmitter, Input, OnInit, Output } from '@angular/core'
 import { MatOption } from '@angular/material/core'
 import { BehaviorSubject } from 'rxjs';
 
@@ -6,7 +6,7 @@ import { BehaviorSubject } from 'rxjs';
     selector: '[appHandleRescheduling]'
 })
 
-export class RescheduleHandlerDirective {
+export class RescheduleHandlerDirective implements OnInit {
     @Input() selected: BehaviorSubject<Set<number>> | undefined;
     @Input() cannotBeSelected: BehaviorSubject<Set<number>> | undefined;
 
@@ -23,7 +23,8 @@ export class RescheduleHandlerDirective {
     ngOnInit() {
         this.cannotBeSelected?.subscribe(value => {
             const isBooked = value && this.cannotBeSelected?.value.has(this.matOption.value);
-            if (isBooked) {
+            const isNotSelected = !this.selected?.value.has(this.matOption.value);
+            if (isBooked && isNotSelected) {
                 this.matOption._getHostElement().textContent = "Booked"
             } else {
                 this.matOption._getHostElement().textContent = `${this.matOption.value}:00`;
@@ -31,7 +32,17 @@ export class RescheduleHandlerDirective {
         })
 
         this.selected?.subscribe(value => {
-            const isSelectable = value && value.has(this.matOption.value) && !this.cannotBeSelected?.value.has(this.matOption.value);
+            const isBooked = value && this.cannotBeSelected?.value.has(this.matOption.value);
+            const isNotSelected = !this.selected?.value.has(this.matOption.value);
+            if (isBooked && isNotSelected) {
+                this.matOption._getHostElement().textContent = "Booked"
+            } else {
+                this.matOption._getHostElement().textContent = `${this.matOption.value}:00`;
+            }
+        })
+
+        this.selected?.subscribe(value => {
+            const isSelectable = value && value.has(this.matOption.value);
             if (isSelectable) {
                 this.toggleSelect();
             } else {
