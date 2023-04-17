@@ -1,24 +1,56 @@
 <div class="timetable-container">
 
-    <div class="calendar-container">
-        <mat-card class="demo-inline-calendar-card">
-            <mat-calendar
-              appDateSelectioHandler
-              (_userSelection)="(selectDay($event))"
-              [(selected)]="todayDate"
-            ></mat-calendar>
-        </mat-card>
-        <button
-          class="book"
-          [routerLink]="['details/']"
+    <div class="calendar-and-appointiments-container">
+        <div class="calendar-container">
+            <mat-card class="demo-inline-calendar-card">
+                <mat-calendar
+                appDateSelectioHandler
+                (_userSelection)="(selectDay($event))"
+                [(selected)]="todayDate"
+                ></mat-calendar>
+            </mat-card>
+            <button
+                class="book"
+                [routerLink]="['details/']"
+            >
+                Book
+            </button>
+            <button
+                class="book"
+                [routerLink]="['details/']"
+            >
+                Reschedule
+            </button>
+        </div>
+
+        <div class="hours-container">
+            <h1>Hours Available</h1>
+            (Click and drag or select one by one)
+        <!-- <mat-form-field> -->
+        <mat-label>Hours</mat-label>
+        <!-- (click)="deselectIfSelected($event)" -->
+        <div
+            class="hours-slots"
         >
-            Book
-        </button>
+        <!-- (click)="reschedule($event)" -->
+        <mat-option
+            *ngFor="let appointment of listOfAppointments.value"
+            (onSelectionChange)="reschedule($event)"
+            [value]="appointment"
+        >
+        <div
+            class="hour hour-{{ appointment.id| number: '1.2-2' }}"
+        >
+            {{ appointment.title | slice:0:25 }}
+        </div>
+        </mat-option>
+        <!-- </mat-select> -->
+        </div>
     </div>
 
     <div class="time-slots">
         <!-- <mat-select #selector placeholder="Choose an Hour" multiple> -->
-            <div class="hours-container">
+        <div class="hours-container">
                 <h1>Hours Available</h1>
                 (Click and drag or select one by one)
             <!-- <mat-form-field> -->

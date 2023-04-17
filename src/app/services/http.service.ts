@@ -40,8 +40,8 @@ export class HttpService {
 
   deleteAppointment(id: number): Observable<Array<Appointment>> {
     console.log(id);
-    return this.http.delete<Array<Appointment>>(`${env.BASE_URL}/appointments`, {
-      params: { id: id },
+    return this.http.delete<Array<Appointment>>(`${env.BASE_URL}/appointments/${id}`, {
+      params: {},
     })
   }
 }

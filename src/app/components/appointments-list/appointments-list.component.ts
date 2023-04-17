@@ -1,10 +1,11 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { formatDate } from '@angular/common';
 import { BehaviorSubject } from 'rxjs';
 import { HttpService } from 'src/app/services/http.service';
 import { Appointment } from 'src/app/interfaces/appointment';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { MatCalendarUserEvent } from '@angular/material/datepicker';
+import { MatOptionSelectionChange } from '@angular/material/core';
 
 @Component({
   selector: 'app-appointments-list',
@@ -12,7 +13,7 @@ import { MatCalendarUserEvent } from '@angular/material/datepicker';
   styleUrls: ['./appointments-list.component.scss']
 })
 
-export class AppointmentsListComponent {
+export class AppointmentsListComponent implements OnInit {
   id: string | undefined;
 
   hours: number[];
@@ -40,6 +41,7 @@ export class AppointmentsListComponent {
   today = new Date();
   todayDate = '';
   constructor(
+    private router: Router,
     private httpService: HttpService,
     private activatedRoute: ActivatedRoute
   ) {
@@ -88,7 +90,17 @@ export class AppointmentsListComponent {
       this.selectedHoursSet = value;
     })
 
+  }
 
+  reschedule(event: MatOptionSelectionChange<Appointment>) {
+    console.log(event.source.value);
+    const appointment = event.source.value;
+    const id = appointment.id;
+    const url = this.router.url.split('/');
+    url[1] = "appointment"
+    console.log(url);
+    const newUrl = url.slice(0, url.length - 1).join('/')
+    this.router.navigate([newUrl, 'reschedule'], { queryParams: { id } , state: { appointment: appointment }});
   }
 
   fillSpacesBetween(start: number, finnish: number, timeUnity: BehaviorSubject<Set<number>>) {

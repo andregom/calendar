@@ -127,7 +127,7 @@ export class ScheduleManagementComponent implements OnInit {
   }
 
   rescheduleAppointment() {
-    if (this.appointment) {
+    if (this.appointment && this.selectedHours.value.size > 0) {
       const app = this.appointment;
       const startHour = new Date(app.start);
       const finnishHour = new Date(app.finnish);
@@ -144,7 +144,9 @@ export class ScheduleManagementComponent implements OnInit {
 
   deleteAppointment() {
     const queryParams = Object.assign({}, this.activatedRoute.snapshot.queryParams);
-    queryParams['id'] !== undefined && this.httpService.deleteAppointment(queryParams['id']);
+    queryParams['id'] !== undefined && this.httpService.deleteAppointment(queryParams['id']).subscribe((res) => {
+      console.log(res);
+    });
     this.router.navigate([this.router.url])
   }
 

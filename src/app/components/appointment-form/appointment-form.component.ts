@@ -52,7 +52,6 @@ export class AppointmentFormComponent implements OnInit {
   }
 
   async onSubmit(appointment: Appointment) {
-    console.log(appointment.start.getDate());
     await this.httpService.createAppointment(appointment).subscribe((res) => {
       this.router.navigate([this.router.url, 'details'], { queryParams: { id: res.id }, state: { ...appointment } });
     });
