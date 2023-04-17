@@ -26,7 +26,7 @@ export class RescheduleHandler {
             if (isBooked) {
                 this.matOption._getHostElement().textContent = "Booked"
             } else {
-                this.matOption._getHostElement().children[0].textContent = `${this.matOption.value}:00`;
+                this.matOption._getHostElement().textContent = `${this.matOption.value}:00`;
             }
         })
 

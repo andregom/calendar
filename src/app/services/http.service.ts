@@ -30,9 +30,10 @@ export class HttpService {
     })
   }
 
-  modifyAppointment(appointment: Appointment): Observable<Array<Appointment>> {
+  modifyAppointment(appointment: Appointment): Observable<Appointment> {
     console.log(appointment);
-    return this.http.put<Array<Appointment>>(`${env.BASE_URL}/appointments`, appointment, {
+    const id = appointment.id;
+    return this.http.put<Appointment>(`${env.BASE_URL}/appointments/${id}`, appointment, {
       params: {},
     })
   }

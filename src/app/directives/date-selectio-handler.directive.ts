@@ -38,7 +38,7 @@ export class DateSelectioHandlerDirective implements OnInit, AfterViewChecked {
         const headerClass = HeaderElsClass;
 
         orderDate.find(each => {
-          console.log(each.getDate(), headerClass[index].children[0].textContent);
+          each.getDate(), headerClass[index].children[0].textContent;
           if (each.getDate() === headerClass[index].value) {
             this.renderer.addClass(HeaderElsClass, 'mat-calendar-body-active');
             this.renderer.setStyle(HeaderElsClass, 'font-weight', '900');

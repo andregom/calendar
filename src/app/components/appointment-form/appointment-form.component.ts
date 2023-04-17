@@ -47,14 +47,15 @@ export class AppointmentFormComponent implements OnInit {
 
   goToTimeSlots(partialAppointmanet: Appointment) {
     const queryParams = Object.assign({}, this.activatedRoute.snapshot.queryParams);
-    this.router.navigate([this.router.url, 'choose_available'], { queryParams, state: {...partialAppointmanet}});
+    this.router.navigate([this.router.url, 'choose_available'], { queryParams, state: { ...partialAppointmanet } });
     console.log(partialAppointmanet);
   }
 
   async onSubmit(appointment: Appointment) {
-      await this.httpService.createAppointment(appointment).subscribe((res) => {
-        this.router.navigate([this.router.url, 'details'], {queryParams: { id: res.id }, state: {...appointment}});
-      });
+    console.log(appointment.start.getDate());
+    await this.httpService.createAppointment(appointment).subscribe((res) => {
+      this.router.navigate([this.router.url, 'details'], { queryParams: { id: res.id }, state: { ...appointment } });
+    });
   }
 
 }

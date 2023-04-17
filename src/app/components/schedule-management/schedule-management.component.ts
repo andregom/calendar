@@ -3,7 +3,7 @@ import { formatDate } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { MatCalendarUserEvent } from '@angular/material/datepicker';
 import { ActivatedRoute, Router } from '@angular/router';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, Observable, map } from 'rxjs';
 import { Appointment } from 'src/app/interfaces/appointment';
 import { HttpService } from 'src/app/services/http.service';
 
@@ -14,6 +14,8 @@ import { HttpService } from 'src/app/services/http.service';
 })
 export class ScheduleManagementComponent implements OnInit {
   id: string | undefined;
+  appointment: Appointment | undefined;
+  state: Observable<any> | undefined;
 
   hours: number[];
   minutes: number[];
@@ -39,7 +41,7 @@ export class ScheduleManagementComponent implements OnInit {
     const queryParams = Object.assign({}, this.activatedRoute.snapshot.queryParams);
     this.id = queryParams['id'];
 
-    this.todayDate = formatDate(this.today, 'dd-MM-yyyy hh:mm:ss a', 'en-US', '+0530');
+    // this.todayDate = formatDate(this.today, 'dd-MM-yyyy hh:mm:ss a', 'en-US', '+0530');
 
     this.selectedDay = new BehaviorSubject(this.today.getDate());
     // Generate an array of all hours in a day (24-hour format)
@@ -47,6 +49,15 @@ export class ScheduleManagementComponent implements OnInit {
 
     // Generate an array of all minutes in an hour
     this.minutes = Array.from({ length: 60 }, (_, i) => i);
+
+    this.state = this.activatedRoute.paramMap
+      .pipe(map(() => window.history.state));
+
+    this.state?.subscribe((data: any) => {
+      this.appointment = data.appointment;
+      console.log(this.appointment)
+      this.todayDate = formatDate(this.appointment?.start ?? this.today, 'dd-MM-yyyy hh:mm:ss a', 'en-US', '+0530');
+    })
   }
 
   ngOnInit(): void {
@@ -68,6 +79,7 @@ export class ScheduleManagementComponent implements OnInit {
 
       this.selectedDay?.subscribe((day: number) => {
         this.selectedHours.next(new Set());
+        this.cannotBeSelectedHours.next(new Set());
         this.listOfAppointments.value.map((app) => {
           const startDate = new Date(app.start);
           const finnishDate = new Date(app.finnish);
@@ -101,14 +113,33 @@ export class ScheduleManagementComponent implements OnInit {
     this.selectedDay?.next(event.value.getDate());
   }
 
+  formatDate(date: Date) {
+    return formatDate(date, 'dd-MM-yyyy hh:mm:ss a', 'en-US', '+0530');
+  }
+
   drop(event: CdkDragDrop<Appointment[]>) {
     const gap = event.currentIndex - event.previousIndex;
     const newSet: Set<number> = new Set();
     this.selectedHours.value.forEach((hour: number) => {
       hour + gap >= 0 && newSet.add(hour + gap)
     });
-    console.log(newSet)
     this.selectedHours.next(newSet);
+  }
+
+  rescheduleAppointment() {
+    if (this.appointment) {
+      const app = this.appointment;
+      const startHour = new Date(app.start);
+      const finnishHour = new Date(app.finnish);
+      app.start = startHour;
+      app.finnish = finnishHour;
+      app.start.setHours(Math.min(...this.selectedHours.value));
+      app.finnish.setHours(Math.max(...this.selectedHours.value));
+      
+      this.httpService.modifyAppointment(this.appointment).subscribe((res) => {
+        console.log(res);
+      });
+    }
   }
 
   deleteAppointment() {

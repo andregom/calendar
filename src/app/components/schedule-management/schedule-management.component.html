@@ -13,8 +13,8 @@
             ></mat-calendar>
         </mat-card>
         <button
-        class="book"
-        [routerLink]="['details/']"
+            class="book"
+            (click)="rescheduleAppointment()"
         >
             Reschedule
         </button>
