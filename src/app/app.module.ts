@@ -20,8 +20,8 @@ import { MatNativeDateModule } from '@angular/material/core';
 
 import { DragDropModule } from '@angular/cdk/drag-drop';
 
-import { SelectionHandler } from 'src/app/directives/selection-handler.directive';
-import { RescheduleHandler } from 'src/app/directives/reschedule-handler.directive';
+import { SelectionHandlerDirective } from 'src/app/directives/selection-handler.directive';
+import { RescheduleHandlerDirective } from 'src/app/directives/reschedule-handler.directive';
 import { ScheduleManagementComponent } from './components/schedule-management/schedule-management.component';
 import { DateSelectioHandlerDirective } from './directives/date-selectio-handler.directive';
 
@@ -33,8 +33,8 @@ import { DateSelectioHandlerDirective } from './directives/date-selectio-handler
     HomeComponent,
     AppointmentsListComponent,
     ScheduleManagementComponent,
-    SelectionHandler,
-    RescheduleHandler,
+    SelectionHandlerDirective,
+    RescheduleHandlerDirective,
     DateSelectioHandlerDirective,
   ],
   imports: [

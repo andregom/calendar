@@ -3,10 +3,10 @@ import { MatOption } from '@angular/material/core'
 import { BehaviorSubject } from 'rxjs';
 
 @Directive({
-    selector: '[handleRescheduling]'
+    selector: '[appHandleRescheduling]'
 })
 
-export class RescheduleHandler {
+export class RescheduleHandlerDirective {
     @Input() selected: BehaviorSubject<Set<number>> | undefined;
     @Input() cannotBeSelected: BehaviorSubject<Set<number>> | undefined;
 

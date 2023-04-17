@@ -38,7 +38,7 @@
                         *ngFor="let hour of hours"
                         [value]="hour"
                         cdkDrag="true"
-                        handleRescheduling
+                        appHandleRescheduling
                         [selected]="(selectedHours)"
                         [cannotBeSelected]="cannotBeSelectedHours"
                     >

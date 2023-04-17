@@ -3,10 +3,10 @@ import { MatOption } from '@angular/material/core'
 import { BehaviorSubject } from 'rxjs';
 
 @Directive({
-    selector: '[handleSelecting]'
+    selector: '[appHandleSelecting]'
 })
 
-export class SelectionHandler {
+export class SelectionHandlerDirective {
     @Input() isSelectingSub: BehaviorSubject<boolean> | undefined;
     @Input() selected: BehaviorSubject<Set<number>> | undefined;
     @Input() cannotBeSelected: BehaviorSubject<Set<number>> | undefined;

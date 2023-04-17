@@ -66,7 +66,7 @@
                 (onSelectionChange)="change($event)"
                 *ngFor="let hour of hours"
                 [value]="hour"
-                handleSelecting
+                appHandleSelecting
                 (startNewSelection)="startNewSelectionHours($event)"
                 (addToSelection)="selectHourItem($event)" 
                 [selected]="(selectedHours)"
@@ -99,7 +99,7 @@
                   *ngFor="let minute of minutes"
                   [value]="minute"
                   style="display: flex; padding: 12px 12px 12px 32px;"
-                  handleSelecting
+                  appHandleSelecting
                   (startNewSelection)="startNewSelectionMinutes($event)"
                   (addToSelection)="selectMinuteItem($event)" 
                   [selected]="(selectedMinutes)"
