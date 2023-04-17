@@ -114,7 +114,7 @@ export class AppointmentsListComponent implements OnInit {
     this.selectedMinutes.next(new Set());
   }
 
-  startSelectingHours(event: any) {
+  startSelectingHours() {
     this.isSelectingHoursSub.next(true);
   }
 
@@ -122,15 +122,15 @@ export class AppointmentsListComponent implements OnInit {
     this.isSelectingHoursSub.next(false);
   }
 
-  startSelectingMinutes(event: any) {
+  startSelectingMinutes() {
     this.isSelectingMinutesSub.next(true);
   }
 
-  startNewSelectionHours(event: any) {
+  startNewSelectionHours() {
     this.selectedHours.next(new Set([]));
   }
 
-  startNewSelectionMinutes(event: any) {
+  startNewSelectionMinutes() {
     this.selectedMinutes.next(new Set([]));
   }
 
@@ -170,8 +170,8 @@ export class AppointmentsListComponent implements OnInit {
     this.fillinThegaps(this.selectedMinutes);
   }
 
-  change(event: any): void {
-    if (event.isUserInput) {
+  change(event: MatOptionSelectionChange<number>): void {
+    if (event) {
       //User selected day
     }
   }

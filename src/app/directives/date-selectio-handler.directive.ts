@@ -1,11 +1,11 @@
-import { AfterViewChecked, Directive, ElementRef, Input, OnInit, Renderer2 } from '@angular/core';
+import { AfterViewChecked, Directive, ElementRef, Input, Renderer2 } from '@angular/core';
 import { MatCalendar } from '@angular/material/datepicker';
 import { BehaviorSubject } from 'rxjs';
 
 @Directive({
   selector: '[appDateSelectioHandler]'
 })
-export class DateSelectioHandlerDirective implements OnInit, AfterViewChecked {
+export class DateSelectioHandlerDirective implements AfterViewChecked {
 
   @Input() selectedDates: BehaviorSubject<Set<Date>>;
   @Input() selectedDays: BehaviorSubject<Set<number>>;
@@ -19,19 +19,10 @@ export class DateSelectioHandlerDirective implements OnInit, AfterViewChecked {
     this.selectedDays = new BehaviorSubject(new Set());
   }
 
-  ngOnInit(): void {
-    //TODO
-  }
-
   ngAfterViewChecked(): void {
-    for (const index in this.matCalendar.monthSelected) {
 
-    }
     const HeaderElsClass = this.elRef.nativeElement.getElementsByClassName('mat-calendar-body-cell')
-    // let HeaderElsClass: MatCalendarCell<Date>[][] = this.matCalendar.monthView._matCalendarBody.rows;
     const orderDate = Array.from(this.selectedDates.value);
-    // console.log(this.selectedDates.value);
-    // tempOrderDate is epoch array, i convert from epoch to date
 
     for (const index in HeaderElsClass) {
       if(typeof HeaderElsClass[index] === 'object') {

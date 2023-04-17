@@ -57,7 +57,7 @@
             <mat-label>Hours</mat-label>
             <!-- (click)="deselectIfSelected($event)" -->
             <div
-              (mousedown)="startSelectingHours($event)"
+              (mousedown)="startSelectingHours()"
               (mouseleave)="finishSelectingHours()"
               (mouseup)="finishSelectingHours()"
               class="hours-slots"
@@ -67,7 +67,7 @@
                 *ngFor="let hour of hours"
                 [value]="hour"
                 appHandleSelecting
-                (startNewSelection)="startNewSelectionHours($event)"
+                (startNewSelection)="startNewSelectionHours()"
                 (addToSelection)="selectHourItem($event)" 
                 [selected]="(selectedHours)"
                 [cannotBeSelected]="(cannotBeSelectedHours)"
@@ -90,7 +90,7 @@
             <!-- <mat-form-field> -->
             <mat-label>Minutes</mat-label>
             <div
-              (mousedown)="startSelectingMinutes($event)"
+              (mousedown)="startSelectingMinutes()"
               (mouseleave)="finishSelectingMinutes()"
               (mouseup)="finishSelectingMinutes()"
               class="minutes-slots"
@@ -100,7 +100,7 @@
                   [value]="minute"
                   style="display: flex; padding: 12px 12px 12px 32px;"
                   appHandleSelecting
-                  (startNewSelection)="startNewSelectionMinutes($event)"
+                  (startNewSelection)="startNewSelectionMinutes()"
                   (addToSelection)="selectMinuteItem($event)" 
                   [selected]="(selectedMinutes)"
                   [cannotBeSelected]="(cannotBeSelectedMinutes)"

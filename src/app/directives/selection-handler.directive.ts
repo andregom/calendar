@@ -1,4 +1,4 @@
-import { Directive, ElementRef, EventEmitter, HostListener, Input, Output } from '@angular/core'
+import { Directive, EventEmitter, HostListener, Input, OnInit, Output } from '@angular/core'
 import { MatOption } from '@angular/material/core'
 import { BehaviorSubject } from 'rxjs';
 
@@ -6,7 +6,7 @@ import { BehaviorSubject } from 'rxjs';
     selector: '[appHandleSelecting]'
 })
 
-export class SelectionHandlerDirective {
+export class SelectionHandlerDirective implements OnInit {
     @Input() isSelectingSub: BehaviorSubject<boolean> | undefined;
     @Input() selected: BehaviorSubject<Set<number>> | undefined;
     @Input() cannotBeSelected: BehaviorSubject<Set<number>> | undefined;
